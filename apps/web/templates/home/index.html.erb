@@ -1,0 +1,81 @@
+<div class="flex justify-center mb-4">
+  <form class="w-full max-w-sm">
+    <div class="flex justify-between items-center border-b-2 border-grey-light py-2">
+      <%=
+        form_for :list, '/lists' do
+          div class: 'input' do
+            text_field :name, class: "focus:border-0 parent w-full text-grey-darker py-2 px-3", placeholder: 'List Name'
+          end
+
+          div class: 'controls' do
+            submit 'Create List', class:"flex-no-shrink bg-grey hover:bg-grey-darker border-grey hover:border-grey text-sm border-2 text-white py-1 px-2 rounded"
+          end
+        end
+      %>
+    </div>
+  </form>
+</div>
+
+
+<% if lists.any? %>
+  <div class="container">
+    <% lists.each do |list| %>
+      <div class="max-w-sm rounded overflow-hidden shadow-lg">
+        <h2><%= list.name %></h2>
+
+        <%=
+          form_for :list, '/lists/delete' do
+            hidden_field :id, value: list.id
+
+            div class: 'controls' do
+              submit 'Delete List', class: "bg-red-light hover:bg-red text-white font-bold py-2 px-4 rounded"
+            end
+          end
+        %>
+
+        <% if list.items.any? %>
+          <div id="items">
+            <% list.items.each do |item| %>
+              <div id= "item">
+
+                <%= 
+                  form_for :item, '/items/delete' do
+                    div class: 'input' do
+                      hidden_field :id, value: item.id
+                    end
+
+                    div class: 'controls' do
+                      submit 'Remove'
+                    end
+                  end
+                %>
+
+                <ul><%= item.text %></ul>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="placeholder">There are no items yet.</p>
+        <% end %>
+
+        <%=
+          form_for :item, '/items' do
+            div class: 'input' do
+              label      :new_item
+              text_field :text
+            end
+
+            hidden_field :list_id, value: list.id
+
+            div class: 'controls' do
+              submit 'Add'
+            end
+          end
+        %>
+
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="placeholder">There are no lists yet.</p>
+<% end %>
