@@ -12,4 +12,6 @@ Lists is a minimal web application that allows you to create, edit, and delete y
 Lasty, go to http://localhost:2300
 
 
-# lists
+## Screenshot
+
+<img src="lists-snapshot.png">
