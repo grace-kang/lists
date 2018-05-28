@@ -3,11 +3,11 @@ Lists is a minimal web application that allows you to create, edit, and delete y
 
 ## Setup
 
-  $ bundle install
+    $ bundle install
 
-  $ bundle exec hanami db prepare
+    $ bundle exec hanami db prepare
 
-  $ bundle exec hanami server
+    $ bundle exec hanami server
 
 Lasty, go to http://localhost:2300
 
