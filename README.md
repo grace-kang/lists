@@ -1,34 +1,15 @@
 # Lists
-
-Welcome to your new Hanami project!
+Lists is a minimal web application that allows you to create, edit, and delete your own lists all in one simple page.
 
 ## Setup
 
-How to run tests:
+$ bundle install
 
-```
-% bundle exec rake
-```
+$ bundle exec hanami db prepare
 
-How to run the development console:
+$ bundle exec hanami server
 
-```
-% bundle exec hanami console
-```
+Lasty, go to http://localhost:2300
 
-How to run the development server:
 
-```
-% bundle exec hanami server
-```
-
-How to prepare (create and migrate) DB for `development` and `test` environments:
-
-```
-% bundle exec hanami db prepare
-
-% HANAMI_ENV=test bundle exec hanami db prepare
-```
-
-Explore Hanami [guides](http://hanamirb.org/guides/), [API docs](http://docs.hanamirb.org/1.2.0/), or jump in [chat](http://chat.hanamirb.org) for help. Enjoy! 🌸
 # lists
