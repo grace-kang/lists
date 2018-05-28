@@ -18,7 +18,7 @@
 <% if lists.any? %>
   <div class="flex flex-wrap my-3 mx-4">
     <% lists.each do |list| %>
-      <div class="flex-auto overflow-hidden shadow-md px-6 py-4 mx-2 my-2">
+      <div class="overflow-hidden shadow-md px-6 py-4 mx-2 my-2">
         <div class="flex flex-wrap justify-between my-3">
           <div class="text-grey-dark"><h2><%= list.name %></h2></div>
     
@@ -53,7 +53,7 @@
                   %>
 
                   <%# list each item if any %>
-                  <div class="overflow-auto"><%= item.text %></div>
+                  <div class="overflow-auto text-grey-darker"><%= item.text %></div>
                 </div>
               </div>
             <% end %>
