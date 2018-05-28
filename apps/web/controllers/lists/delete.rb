@@ -3,7 +3,8 @@ module Web::Controllers::Lists
     include Web::Action
 
     def call(params)
-      ListRepository.new.delete(params[:list_id])
+      puts params[:list]
+      ListRepository.new.delete(params[:list][:id])
 
       redirect_to '/'
     end

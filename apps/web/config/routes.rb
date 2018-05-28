@@ -1,7 +1,5 @@
 root to: 'home#index'
-get '/items/new', to: 'items#new'
 post '/items', to: 'items#create'
 post '/lists', to: 'lists#create'
-get '/lists/new', to: 'lists#new'
 post '/items/delete', to: 'items#delete'
-get '/lists/delete', to: 'lists#delete'
+post '/lists/delete', to: 'lists#delete'

@@ -1,43 +1,45 @@
-<div class="flex justify-center mb-4">
-  <form class="w-full max-w-sm">
-    <div class="flex justify-between items-center border-b-2 border-grey-light py-2">
+  <%# <div claass="w-full md:w-1/2"> %>
+    <div class="flex justify-center">
       <%=
         form_for :list, '/lists' do
           div class: 'input' do
-            text_field :name, class: "focus:border-0 parent w-full text-grey-darker py-2 px-3", placeholder: 'List Name'
+            text_field :name, class: "border shadow parent w-full text-grey-darker py-2 px-3 my-2", placeholder: 'List Name'
           end
 
           div class: 'controls' do
-            submit 'Create List', class:"flex-no-shrink bg-grey hover:bg-grey-darker border-grey hover:border-grey text-sm border-2 text-white py-1 px-2 rounded"
+            submit 'Create List', class:"bg-grey hover:bg-grey-dark text-sm text-white py-1 px-2 rounded"
           end
         end
       %>
     </div>
-  </form>
-</div>
+  <%# </div> %>
 
 
 <% if lists.any? %>
-  <div class="container">
+  <div class="flex flex-wrap my-3">
     <% lists.each do |list| %>
-      <div class="max-w-sm rounded overflow-hidden shadow-lg">
-        <h2><%= list.name %></h2>
+      <div class="max-w-xs overflow-hidden shadow-md px-6 py-4 mx-2 my-2">
+        <div class="flex flex-wrap justify-between">
+          <div class="text-grey-darker"><h2><%= list.name %></h2></div>
+    
+          <%# delete list button %>
+          <%=
+            form_for :list, '/lists/delete' do
+              hidden_field :id, value: list.id
 
-        <%=
-          form_for :list, '/lists/delete' do
-            hidden_field :id, value: list.id
-
-            div class: 'controls' do
-              submit 'Delete List', class: "bg-red-light hover:bg-red text-white font-bold py-2 px-4 rounded"
+              div class: 'controls' do
+                submit 'Remove', class: "bg-grey hover:bg-grey-dark text-sm text-white px-2 py-1 rounded"
+              end
             end
-          end
-        %>
+          %>
+        </div>
 
         <% if list.items.any? %>
           <div id="items">
             <% list.items.each do |item| %>
               <div id= "item">
 
+                <%# remove item button for each item if any %>
                 <%= 
                   form_for :item, '/items/delete' do
                     div class: 'input' do
@@ -50,6 +52,7 @@
                   end
                 %>
 
+                <%# list each item if any %>
                 <ul><%= item.text %></ul>
               </div>
             <% end %>
@@ -58,6 +61,7 @@
           <p class="placeholder">There are no items yet.</p>
         <% end %>
 
+        <%# add new item form %>
         <%=
           form_for :item, '/items' do
             div class: 'input' do

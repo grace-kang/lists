@@ -3,7 +3,8 @@ module Web::Controllers::Items
     include Web::Action
 
     def call(params)
-      ItemRepository.new.delete(params[:item])
+      puts params[:item]
+      ItemRepository.new.delete(params[:item][:id])
 
       redirect_to '/'
     end
