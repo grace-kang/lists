@@ -7,7 +7,7 @@
           end
 
           div class: 'controls' do
-            submit 'Create List', class:"bg-grey hover:bg-grey-dark text-sm text-white py-1 px-2 rounded"
+            submit 'Create', class:"bg-grey hover:bg-grey-dark font-semibold text-sm text-white py-1 px-2 rounded"
           end
         end
       %>
@@ -16,11 +16,11 @@
 
 
 <% if lists.any? %>
-  <div class="flex flex-wrap my-3">
+  <div class="flex flex-wrap my-3 mx-4">
     <% lists.each do |list| %>
-      <div class="max-w-xs overflow-hidden shadow-md px-6 py-4 mx-2 my-2">
-        <div class="flex flex-wrap justify-between">
-          <div class="text-grey-darker"><h2><%= list.name %></h2></div>
+      <div class="flex-auto overflow-hidden shadow-md px-6 py-4 mx-2 my-2">
+        <div class="flex flex-wrap justify-between my-3">
+          <div class="text-grey-dark"><h2><%= list.name %></h2></div>
     
           <%# delete list button %>
           <%=
@@ -28,7 +28,7 @@
               hidden_field :id, value: list.id
 
               div class: 'controls' do
-                submit 'Remove', class: "bg-grey hover:bg-grey-dark text-sm text-white px-2 py-1 rounded"
+                submit 'X', class: "bg-grey hover:bg-grey-dark text-sm font-semibold text-white px-1 rounded"
               end
             end
           %>
@@ -38,41 +38,41 @@
           <div id="items">
             <% list.items.each do |item| %>
               <div id= "item">
+                <div class="flex">
+                  <%# remove item button for each item if any %>
+                  <%= 
+                    form_for :item, '/items/delete' do
+                      div class: 'input' do
+                        hidden_field :id, value: item.id
+                      end
 
-                <%# remove item button for each item if any %>
-                <%= 
-                  form_for :item, '/items/delete' do
-                    div class: 'input' do
-                      hidden_field :id, value: item.id
+                      div class: 'controls' do
+                        submit 'x', class:"bg-white text-sm font-semibold text-grey-dark mx-3 rounded"
+                      end
                     end
+                  %>
 
-                    div class: 'controls' do
-                      submit 'Remove'
-                    end
-                  end
-                %>
-
-                <%# list each item if any %>
-                <ul><%= item.text %></ul>
+                  <%# list each item if any %>
+                  <div class="overflow-auto"><%= item.text %></div>
+                </div>
               </div>
             <% end %>
           </div>
         <% else %>
-          <p class="placeholder">There are no items yet.</p>
+          <p class="placeholder"></p>
         <% end %>
 
         <%# add new item form %>
         <%=
           form_for :item, '/items' do
             div class: 'input' do
-              label      :new_item
-              text_field :text
+              text_field :text, class: "border shadow parent w-full text-grey-darker py-2 px-3 my-2", placeholder: 'New Item'
             end
 
             hidden_field :list_id, value: list.id
 
             div class: 'controls' do
-              submit 'Add'
+              submit 'Add', class:"bg-grey hover:bg-grey-dark font-semibold text-sm text-white py-1 px-2 rounded"
             end
           end
         %>
