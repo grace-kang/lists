@@ -6,7 +6,7 @@ module Web::Controllers::Items
       puts params[:item]
       ItemRepository.new.delete(params[:item][:id])
 
-      redirect_to '/'
+      redirect_to '/home/index'
     end
   end
 end

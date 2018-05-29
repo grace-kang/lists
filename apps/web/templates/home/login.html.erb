@@ -1,0 +1,13 @@
+<h2>Welcome!</h2>
+
+<%=
+  form_for :login, '/sessions/new' do
+    submit 'Log In'
+  end
+%>
+
+<%=
+  form_for :signup, '/users/signup' do
+    submit 'Sign Up'
+  end
+%>

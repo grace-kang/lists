@@ -15,9 +15,9 @@ module Web::Controllers::Items
       if params.valid?
         ItemRepository.new.create(params[:item])
 
-        redirect_to '/'
+        redirect_to '/home/index'
       else
-        redirect_to '/'
+        redirect_to '/home/index'
         self.status = 422
       end
     end

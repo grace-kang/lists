@@ -1,0 +1,28 @@
+<h2>Sign Up </h2>
+
+<%=
+  form_for :user, '/users' do
+    div do
+      label :email
+      text_field :email
+    end
+
+    div do
+      label :password
+      text_field :password
+    end
+ 
+    div do
+      label :confirm_password
+      text_field :password_confirmation
+    end
+
+    submit 'Sign Up'
+  end
+%>
+
+<%=
+  form_for :login, '/sessions/new' do
+    submit 'Log In'
+  end
+%>

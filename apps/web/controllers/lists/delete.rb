@@ -6,7 +6,7 @@ module Web::Controllers::Lists
       puts params[:list]
       ListRepository.new.delete(params[:list][:id])
 
-      redirect_to '/'
+      redirect_to '/home/index'
     end
   end
 end

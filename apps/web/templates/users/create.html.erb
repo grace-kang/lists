@@ -1,0 +1,16 @@
+<% unless params.valid? %>
+  <div class="errors">
+    <h3>There was a problem with your submission</h3>
+    <ul>
+      <% params.error_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <%=
+    form_for :signup, '/users/signup' do
+      submit 'Sign Up'
+    end
+  %>
+<% end %>
