@@ -3,7 +3,6 @@ require 'hanami/setup'
 require 'hanami/model'
 require_relative '../lib/lists'
 require_relative '../apps/web/application'
-require 'pry'
 
 Hanami.configure do
   mount Web::Application, at: '/'
