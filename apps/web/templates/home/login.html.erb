@@ -1,13 +1,22 @@
-<h2>Welcome!</h2>
+<div class='text-5xl text-grey-dark ml-3 my-8'>Welcome.</div>
 
-<%=
-  form_for :login, '/sessions/new' do
-    submit 'Log In'
-  end
-%>
+<div class='flex flex-col'>
+	<% unless flash[:signup_success].nil? %>
+		<div class='text-center text-red text-xs italic'><%= flash[:signup_success] %></div>
+	<% end %>
+</div>
+ 
 
-<%=
-  form_for :signup, '/users/signup' do
-    submit 'Sign Up'
-  end
-%>
+<div class="flex justify-center">
+ <%=
+    form_for :login, '/sessions/new' do
+      submit 'Log In', class: 'bg-grey mt-8 hover:bg-grey-dark font-semibold text-white py-2 px-3 mx-6 rounded'
+    end
+  %>
+
+  <%=
+    form_for :signup, '/users/signup' do
+      submit 'Sign Up', class: 'bg-grey mt-8 hover:bg-grey-dark font-semibold text-white py-2 px-3 mx-6 rounded'
+    end
+  %>
+</div>

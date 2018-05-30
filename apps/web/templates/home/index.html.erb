@@ -1,32 +1,25 @@
+    <%=
+    form_for :session, '/sessions/logout', method: :delete do
+      submit 'Log Out', class: "hover:bg-grey-light font-semibold border border-2 border-grey text-sm rounded text-grey-dark px-2 py-1 mx-2"
+    end
+  %>
+  
   <%# <div class="flex "> %>
     <div class="flex justify-center">
       <%=
-        form_for :list, '/lists' do
-          div class: 'input' do
-            text_field :name, class: "border shadow parent w-full text-grey-darker py-2 px-3 my-2", placeholder: 'List Name'
-          end
-          
+        form_for :list, '/lists', class: "w-full max-w-xs" do
+          text_field :name, class: "border shadow parent w-full text-grey-darker py-2 px-3 my-2", placeholder: 'List Name'
           hidden_field :user_id, value: user.id
-
-          div class: 'controls' do
-            submit 'Create', class:"bg-grey hover:bg-grey-dark font-semibold text-sm text-white py-1 px-2 rounded"
-          end
+          submit 'Create', class:"bg-grey hover:bg-grey-dark font-semibold text-sm text-white py-1 px-2 rounded"
         end
       %>
     </div>
   <%# </div> %>
 
-  <%=
-    form_for :session, '/sessions/logout', method: :delete do
-      submit 'Log Out'
-    end
-  %>
-
-
 <% if lists.any? %>
   <div class="flex flex-wrap my-3 mx-4">
     <% lists.each do |list| %>
-      <div class="overflow-hidden shadow-md px-6 py-4 mx-2 my-2">
+      <div class="self-start overflow-hidden shadow-md px-6 py-4 mx-2 my-2">
         <div class="flex flex-wrap justify-between my-3">
           <div class="text-grey-dark"><h2><%= list.name %></h2></div>
     
@@ -89,5 +82,5 @@
     <% end %>
   </div>
 <% else %>
-  <p class="placeholder">There are no lists yet.</p>
+  <p class="placeholder text-sm text-grey-dark m-4">You do not have any lists yet.</p>
 <% end %>

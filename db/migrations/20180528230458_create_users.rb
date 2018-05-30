@@ -3,7 +3,7 @@ Hanami::Model.migration do
     create_table :users do
       primary_key :id
 
-      column :email, String, null: false
+      column :email, String, null: false, unique: true
       column :hashed_pass, String, null: false
 
       column :created_at, DateTime, null: false

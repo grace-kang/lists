@@ -10,17 +10,26 @@ module Web::Controllers::Users
     end
 
     def call(params)
+      @error_messages = []
+
       if params.valid?
         password = params[:user][:password]
         email = params[:user][:email]
         hashed_pass = hashed_password(password)
         repository = UserRepository.new
-      
-        @user = repository.create(email: email, hashed_pass: hashed_pass)
+        
+        if repository.find_by_email(email)
+          flash[:email] = 'That email has been taken. Please try again.'
+          redirect_to '/users/signup'
+        else
+          @user = repository.create(email: email, hashed_pass: hashed_pass)
+					flash[:signup_success] = "Successfully signed up! Please log in."
+          redirect_to '/'
+        end
 
-        redirect_to '/'
       else
-        self.status = 422
+        flash[:input_errors] = params.error_messages
+        redirect_to '/users/signup'
       end
     end
   end

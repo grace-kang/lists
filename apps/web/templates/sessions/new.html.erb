@@ -1,23 +1,29 @@
-<h2>Log In </h2>
+<div class='text-center text-grey-dark text-2xl my-8 font-bold'>Log In</div>
+
+<div class='flex justify-center'>
+  <%=
+    form_for :session, '/sessions', class: 'flex-col' do
+      div do
+        text_field :email, class: 'border shadow parent w-full text-grey-darker py-2 px-3 my-2', placeholder: 'Email'
+      end
+
+      div do
+        text_field :password,type: 'password', class: 'border shadow parent w-full text-grey-darker py-2 px-3 my-2', placeholder: 'Password'
+      end
+
+      submit 'Log In', class: 'bg-grey hover:bg-grey-dark font-semibold text-sm text-white py-1 px-2 my-4 rounded'
+    end
+  %>
+</div>
+
+<div class='flex flex-col'>
+	<% unless flash[:login_error].nil? %>
+		<div class='text-center text-red text-xs italic'><%= flash[:login_error] %></div>
+	<% end %>
+</div>
 
 <%=
-  form_for :session, '/sessions' do
-    div do
-      label :email
-      text_field :email
-    end
-
-    div do
-      label :password
-      text_field :password
-    end
-
-    submit 'Log In'
-  end
-%>
-
-<%=
-  form_for :signup, '/users/signup' do
-    submit 'Sign Up'
+  form_for :signup, '/users/signup', class: 'flex justify-center' do
+    submit 'Sign Up', class: 'text-grey-dark text-sm rounded border-2 mt-4 py-1 px-2'
   end
 %>
