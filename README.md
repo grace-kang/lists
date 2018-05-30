@@ -17,4 +17,4 @@ Or go to https://lists-web-app.herokuapp.com/ to use the application.
 
 ## Screenshot
 
-<img src="lists-snapshot.png">
+<img src="lists.png">
