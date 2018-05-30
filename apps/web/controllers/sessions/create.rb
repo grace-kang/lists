@@ -8,7 +8,7 @@ module Web::Controllers::Sessions
 
       @user = UserRepository.new.find_by_email(email)
       if authenticated?(password)
-        login("Success")
+        login('Success')
         redirect_to '/home/index'
       else
         flash[:login_error] = 'Log in failed. Please try again.'
