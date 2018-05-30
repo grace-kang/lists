@@ -446,6 +446,14 @@ button,
   border-color: #b8c2cc;
 }
 
+.hover\:bg-grey-dark:hover {
+  background-color: #606f7b;
+}
+
+.hover\:bg-grey-light:hover {
+  background-color: #dae1e7;
+}
+
 .rounded {
   border-radius: .25rem;
 }
