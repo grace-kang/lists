@@ -11,12 +11,9 @@ Run locally:
 
     $ bundle exec hanami server
 
-Lasty, go to http://localhost:2300
+Go to http://localhost:2300 to use the application.
 
-### TODO
-testing
-deploy application
-
+Or go to https://lists-web-app.herokuapp.com/ to use the application.
 
 ## Screenshot
 
