@@ -8,6 +8,7 @@ module Web::Controllers::Items
       required(:item).schema do
         required(:text).filled(:str?)
         required(:list_id).filled(:int?)
+				required(:done).filled(:bool?)
       end
     end
 

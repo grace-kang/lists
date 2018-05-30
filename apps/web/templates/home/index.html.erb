@@ -38,25 +38,48 @@
         <% if list.items.any? %>
           <div id="items">
             <% list.items.each do |item| %>
-              <div id= "item">
-                <div class="flex">
-                  <%# remove item button for each item if any %>
+							<% if !item.done %>
+                <div class="flex justify-between">
                   <%= 
-                    form_for :item, '/items/delete' do
+                    form_for :item, '/items/mark' do
                       div class: 'input' do
                         hidden_field :id, value: item.id
                       end
 
                       div class: 'controls' do
-                        submit 'x', class:"bg-white text-sm font-semibold text-grey-dark mx-3 rounded"
+                        submit item.text, class:"text-grey-darker ml-3 overflow-auto"
                       end
                     end
                   %>
-
-                  <%# list each item if any %>
-                  <div class="overflow-auto text-grey-darker"><%= item.text %></div>
+									<%=
+										form_for :item, '/items/delete' do
+											hidden_field :id, value: item.id
+											submit 'x', class: 'bg-white text-sm font-semibold text-grey-dark mx-3 rounded'
+										end
+									%>
                 </div>
-              </div>
+							<% end %>
+							<% if item.done %>
+								<div class="flex justify-between">
+                  <%= 
+                    form_for :item, '/items/unmark' do
+                      div class: 'input' do
+                        hidden_field :id, value: item.id
+                      end
+
+                      div class: 'controls' do
+                        submit item.text, class:"text-grey ml-3 line-through overflow-auto"
+                      end
+                    end
+                  %>
+									<%=
+										form_for :item, '/items/delete' do
+											hidden_field :id, value: item.id
+											submit 'x', class: 'bg-white text-sm font-semibold text-grey-dark mx-3 rounded'
+										end
+									%>
+								</div>
+							<% end %>
             <% end %>
           </div>
         <% else %>
@@ -69,6 +92,8 @@
             div class: 'input' do
               text_field :text, class: "border shadow parent w-full text-grey-darker py-2 px-3 my-2", placeholder: 'New Item'
             end
+						
+						hidden_field :done, value: false
 
             hidden_field :list_id, value: list.id
 
