@@ -14,7 +14,7 @@ module Web::Controllers::Home
       list_repo = ListRepository.new
       @user = user_repo.find_lists(@user.id)
       @lists = @user.lists
-      @lists.map! { |list| list_repo.find_items(list.id) }
+      @lists.map! { |list| list = list_repo.find_items(list.id) }
     end
   end
 end
