@@ -72,8 +72,6 @@ GEM
       hanami-helpers (~> 1.2)
       hanami-utils (~> 1.2)
       tilt (~> 2.0, >= 2.0.2)
-    hanami-bootstrap (0.5.0)
-      hanami-assets (>= 0.2, < 2)
     hanami-cli (0.2.0)
       concurrent-ruby (~> 1.0)
       hanami-utils (~> 1.2)
@@ -170,7 +168,6 @@ DEPENDENCIES
   capybara
   dotenv (~> 2.0)
   hanami (~> 1.2)
-  hanami-bootstrap
   hanami-model (~> 1.2)
   hanami-webconsole
   minitest
