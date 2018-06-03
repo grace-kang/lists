@@ -1,26 +1,33 @@
 <body>
+  <%# logout button %>
   <%=
     form_for :session, '/sessions/logout', method: :delete do
       submit 'Log Out', class: "hover:bg-grey-light font-semibold border border-2 border-grey text-sm rounded text-grey-dark px-2 py-1 mx-2"
     end
   %>
     
-      <div class="flex justify-center">
-        <%=
-          form_for :list, '/lists', class: "w-full max-w-xs" do
-            text_field :name, class: "border shadow parent w-full text-grey-darker py-2 px-3 my-2", placeholder: 'List Name'
-            hidden_field :user_id, value: user.id
-            submit 'Create', class:"bg-grey hover:bg-grey-dark font-semibold text-sm text-white py-1 px-2 rounded"
-          end
-        %>
-      </div>
+  <%# new list form %>
+  <div class="flex justify-center">
+    <%=
+      form_for :list, '/lists', class: "w-full max-w-xs" do
+        text_field :name, class: "border shadow parent text-grey-darker py-2 px-3 my-2", placeholder: 'List Name'
+        hidden_field :user_id, value: user.id
+        submit 'Create', class:"bg-grey hover:bg-grey-dark font-semibold text-sm text-white py-1 px-2 rounded"
+      end
+    %>
+  </div>
 
+<%# show all the lists %>
   <% if lists.any? %>
     <div class="flex flex-wrap my-3 mx-4">
       <% lists.each do |list| %>
         <div class="self-start overflow-hidden shadow-md px-6 py-4 mx-2 my-2">
           <div class="flex flex-wrap justify-between my-3">
+
+            <%# button for list_name %>
             <button name="list_name" class="text-grey-dark"><h2><%= list.name %></h2></button>
+
+            <%# hidden list rename form %>
             <div name="list_form" style="display:none">
               <%=
                 form_for :list, '/lists/rename' do
@@ -30,7 +37,9 @@
                 end
               %>
             </div>
+            <%= javascript 'rename_list' %>
 
+            <%# delete list x button %>
             <div name="delete_list">
               <%=
                 form_for :list, '/lists/delete' do
@@ -42,25 +51,36 @@
                 end
               %>
             </div>
-            <%= javascript 'index' %>
           </div>
 
+          <%# list all items in a list %>
           <% if list.items.any? %>
             <div id="items">
               <% list.items.each do |item| %>
+
+                <%# list not done items %>
                 <% if !item.done %>
                   <div class="flex justify-between">
-                    <%= 
-                      form_for :item, '/items/mark' do
-                        div class: 'input' do
-                          hidden_field :id, value: item.id
-                        end
+                    <div class= "flex content-center">
 
-                        div class: 'controls' do
-                          submit item.text, class:"text-grey-darker ml-3 overflow-auto"
+                      <%# add subitem button %>
+                      <button name="subitem_button" class="text-grey-dark font-semibold my-1">+</button>
+
+                      <%# item name, click to mark %>
+                      <%= 
+                        form_for :item, '/items/mark' do
+                          div class: 'input' do
+                            hidden_field :id, value: item.id
+                          end
+
+                          div class: 'controls' do
+                            submit item.text, class:"text-grey-darker ml-3 overflow-auto"
+                          end
                         end
-                      end
-                    %>
+                      %>
+                    </div>
+
+                    <%# delete item button %>
                     <%=
                       form_for :item, '/items/delete' do
                         hidden_field :id, value: item.id
@@ -68,9 +88,73 @@
                       end
                     %>
                   </div>
+
+                  <%# list subitems if any %>
+                  <% if item.subitems.any? %>
+                    <% item.subitems.each do |subitem|%>
+                      <% if !subitem.done %>
+                        <div class="flex justify-between">
+                          <%# subitem text, click to mark %>
+                          <%= 
+                            form_for :subitem, '/subitem/mark' do
+                              hidden_field :id, value: subitem.id
+                              submit subitem.text, class:"text-grey-darker mx-3 overflow-auto px-6"
+                            end
+                          %>
+
+                          <%# delete subitem button %>
+                          <%= 
+                            form_for :subitem, '/subitem/delete' do
+                              hidden_field :id, value: subitem.id
+                              submit 'x', class: 'bg-white text-sm font-semibold text-grey-dark mx-3 rounded'
+                            end
+                          %>
+                        </div>
+                      <% end %>
+
+                      <% if subitem.done %>
+                        <div class="flex justify-between">
+                          <%# subitem text, click to unmark %>
+                          <%=
+                            form_for :subitem, '/subitem/unmark' do
+                              hidden_field :id, value: subitem.id
+                              submit subitem.text, class:"text-grey mx-3 line-through overflow-auto px-6"
+                            end
+                          %>
+
+                          <%# delete subitem button %>
+                          <%= 
+                            form_for :subitem, '/subitem/delete' do
+                              hidden_field :id, value: subitem.id
+                              submit 'x', class: 'bg-white text-sm font-semibold text-grey-dark mx-3 rounded'
+                            end
+                          %> 
+                        </div>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+
+
+                  <%# hidden add subitem form %>
+                  <div name="subitem_form" style="display:none">
+                    <%= 
+                      form_for :subitem, '/subitem' do
+                        hidden_field :item_id, value: item.id
+                        hidden_field :done, value: false
+                        text_field :text, class: "border shadow parent text-grey-darker py-2 px-2", placeholder: 'New Subitem'
+                        submit 'Add', class:"bg-grey hover:bg-grey-dark font-semibold text-sm text-white py-1 px-2 rounded"
+                      end
+                    %>
+                  </div>  
+                  <%= javascript 'add_subitem' %>
+
                 <% end %>
+
+                <%# list done items %>
                 <% if item.done %>
                   <div class="flex justify-between">
+
+                    <%# item name, click to unmark %>
                     <%= 
                       form_for :item, '/items/unmark' do
                         div class: 'input' do
@@ -82,6 +166,8 @@
                         end
                       end
                     %>
+
+                    <%# delete item button %>
                     <%=
                       form_for :item, '/items/delete' do
                         hidden_field :id, value: item.id

@@ -1,10 +1,9 @@
-module Web::Controllers::Items
+module Web::Controllers::Subitem
   class Delete
     include Web::Action
 
     def call(params)
-      ItemRepository.new.delete(params[:item][:id])
-
+      SubitemRepository.new.delete(params[:subitem][:id])
       redirect_to '/home/index'
     end
   end
