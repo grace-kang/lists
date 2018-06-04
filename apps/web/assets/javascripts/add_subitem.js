@@ -21,10 +21,8 @@ addEventListener("click", function(event){
 
     
   if (isClickInside) {
-    hide(subitem_button[index]);
     show(subitem_form[index]);
   } else {
-    subitem_button.forEach(show);
     subitem_form.forEach(hide);
   }
 });

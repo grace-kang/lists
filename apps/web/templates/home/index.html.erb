@@ -138,10 +138,10 @@
                   <%# hidden add subitem form %>
                   <div name="subitem_form" style="display:none">
                     <%= 
-                      form_for :subitem, '/subitem' do
+                      form_for :subitem, '/subitem', class: 'px-6' do
                         hidden_field :item_id, value: item.id
                         hidden_field :done, value: false
-                        text_field :text, class: "border shadow parent text-grey-darker py-2 px-2", placeholder: 'New Subitem'
+                        text_field :text, class: "border shadow parent text-grey-darker px-2 py-2", placeholder: 'New Subitem'
                         submit 'Add', class:"bg-grey hover:bg-grey-dark font-semibold text-sm text-white py-1 px-2 rounded"
                       end
                     %>
