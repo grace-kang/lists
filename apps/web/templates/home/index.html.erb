@@ -11,7 +11,7 @@
     <%=
       form_for :list, '/lists', class: "w-full max-w-xs" do
         text_field :name, class: "border shadow parent text-grey-darker py-2 px-3 my-2", placeholder: 'List Name'
-        hidden_field :user_id, value: user.id
+        hidden_field :user_id, value: this_user.id
         submit 'Create', class:"bg-grey hover:bg-grey-dark font-semibold text-sm text-white py-1 px-2 rounded"
       end
     %>

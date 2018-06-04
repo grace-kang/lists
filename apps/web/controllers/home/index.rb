@@ -1,22 +1,22 @@
 module Web::Controllers::Home
   class Index
     include Web::Action
+    include Import['repositories.user']
+    include Import['repositories.list']
+    include Import['repositories.item']
 
-    expose :user
+    expose :this_user
     expose :lists
 
     def call(_)
       check_for_logged_in_user
       handle_session
-      user_repo = UserRepository.new
-      @user = session[:current_user]
-      list_repo = ListRepository.new
-      item_repo = ItemRepository.new
+      @this_user = session[:current_user]
 
-      @user = user_repo.find_lists(@user.id)
-      @lists = @user.lists
-      @lists.map! { |list| list_repo.find_items(list.id) }
-      @lists.each { |list| list.items.map! { |item| item_repo.find_subitems(item.id) } }
+      @this_user = user.find_lists(@this_user.id)
+      @lists = @this_user.lists
+      @lists.map! { |l| list.find_items(l.id) }
+      @lists.each { |l| l.items.map! { |i| item.find_subitems(i.id) } }
     end
   end
 end
