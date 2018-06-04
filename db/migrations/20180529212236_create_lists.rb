@@ -4,7 +4,6 @@ Hanami::Model.migration do
       primary_key :id
       foreign_key :user_id, :users, on_delete: :cascade, null: false
 
-
       column :name, String, null: false
 
       column :created_at, DateTime, null: false

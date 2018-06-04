@@ -21,6 +21,8 @@ GEM
     concurrent-ruby (1.0.5)
     debug_inspector (0.0.3)
     dotenv (2.4.0)
+    dry-auto_inject (0.4.6)
+      dry-container (>= 0.3.4)
     dry-configurable (0.7.0)
       concurrent-ruby (~> 1.0)
     dry-container (0.6.0)
@@ -29,6 +31,7 @@ GEM
     dry-core (0.4.6)
       concurrent-ruby (~> 1.0)
     dry-equalizer (0.2.1)
+    dry-inflector (0.1.2)
     dry-initializer (1.4.1)
     dry-logic (0.4.2)
       dry-container (~> 0.2, >= 0.2.6)
@@ -40,6 +43,15 @@ GEM
       dry-equalizer (~> 0.2)
       dry-types (~> 0.9, >= 0.9.0)
       ice_nine (~> 0.11)
+    dry-system (0.9.2)
+      concurrent-ruby (~> 1.0)
+      dry-auto_inject (>= 0.4.0)
+      dry-configurable (~> 0.7, >= 0.7.0)
+      dry-container (~> 0.6)
+      dry-core (>= 0.3.1)
+      dry-equalizer (~> 0.2)
+      dry-inflector (~> 0.1)
+      dry-struct (~> 0.3)
     dry-types (0.11.1)
       concurrent-ruby (~> 1.0)
       dry-configurable (~> 0.1)
@@ -167,6 +179,7 @@ PLATFORMS
 DEPENDENCIES
   capybara
   dotenv (~> 2.0)
+  dry-system
   hanami (~> 1.2)
   hanami-model (~> 1.2)
   hanami-webconsole

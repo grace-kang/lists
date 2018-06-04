@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 source 'https://rubygems.org'
 ruby '2.5.1'
 gem 'hanami',       '~> 1.2'
@@ -5,6 +6,7 @@ gem 'hanami-model', '~> 1.2'
 gem 'pg'
 gem 'rake'
 gem 'tachiban'
+gem 'dry-system'
 
 group :development do
   # Code reloading
