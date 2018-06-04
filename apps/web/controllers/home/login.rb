@@ -1,5 +1,5 @@
 module Web::Controllers::Home
-  class Login
+  class Login 
     include Web::Action
 
     def call(params); end

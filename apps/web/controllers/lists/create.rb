@@ -2,6 +2,9 @@ module Web::Controllers::Lists
   class Create
     include Web::Action
 
+    puts Application.keys
+    include Import['repositories.list']
+
     expose :user
     expose :list
 
@@ -14,7 +17,7 @@ module Web::Controllers::Lists
 
     def call(params)
       if params.valid?
-        ListRepository.new.create(params[:list])
+        list.create(params[:list])
 
         redirect_to '/home/index'
       else

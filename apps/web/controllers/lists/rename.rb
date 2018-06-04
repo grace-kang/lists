@@ -1,11 +1,11 @@
 module Web::Controllers::Lists
   class Rename
     include Web::Action
+    include Import['repositories.list']
 
     def call(params)
-      repository = ListRepository.new
       list_id = params[:list][:id]
-      repository.update(list_id, name: params[:list][:name])
+      list.update(list_id, name: params[:list][:name])
       redirect_to '/home/index'
     end
   end
