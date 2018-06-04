@@ -1,11 +1,11 @@
 module Web::Controllers::Items
   class Unmark
     include Web::Action
+    include Import['repositories.item']
 
     def call(params)
-			repository = ItemRepository.new
-			item_id = params[:item][:id]
-			repository.update(item_id, done: false)
+		  item_id = params[:item][:id]
+			item.update(item_id, done: false)
 			redirect_to '/home/index'
     end
   end

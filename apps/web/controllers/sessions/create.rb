@@ -1,12 +1,13 @@
 module Web::Controllers::Sessions
   class Create
     include Web::Action
+    include Import['repositories.user']
 
     def call(params)
       email = params[:session][:email]
       password = params[:session][:password]
 
-      @user = UserRepository.new.find_by_email(email)
+      @user = user.find_by_email(email)
       if authenticated?(password)
         login('Success')
         redirect_to '/home/index'

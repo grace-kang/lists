@@ -1,8 +1,7 @@
 module Web::Controllers::Items
   class Create
     include Web::Action
-
-    expose :item
+    include Import['repositories.item']
 
     params do
       required(:item).schema do
@@ -14,7 +13,7 @@ module Web::Controllers::Items
 
     def call(params)
       if params.valid?
-        ItemRepository.new.create(params[:item])
+        item.create(params[:item])
 
         redirect_to '/home/index'
       else

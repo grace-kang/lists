@@ -1,11 +1,11 @@
 module Web::Controllers::Subitem
   class Mark
     include Web::Action
+    include Import['repositories.subitem']
 
     def call(params)
-      repository = SubitemRepository.new
 			subitem_id = params[:subitem][:id]
-			repository.update(subitem_id, done: true) 
+			subitem.update(subitem_id, done: true) 
 			redirect_to '/home/index'
     end
   end
