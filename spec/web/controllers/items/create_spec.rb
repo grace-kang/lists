@@ -2,26 +2,49 @@ require_relative '../../../spec_helper'
 
 describe Web::Controllers::Items::Create do
   let(:action) { Web::Controllers::Items::Create.new }
-  let(:list) { ListRepository.new.create(name: 'list1') }
-  let(:params) { Hash[item: { list_id: list.id, text: 'mushrooms' }] }
-  let(:repository) { ItemRepository.new }
+  include Import['repositories.user']
+  include Import['repositories.list']
+  include Import['repositories.item']
 
   before do
-    repository.clear
+    user.clear
+    list.clear
+    item.clear
+
+    @this_user = user.create(email: 'test', hashed_pass: 'test')
+    @new_list = list.create(name: 'Groceries', user_id: @this_user.id)
   end
 
-  it 'creates a new item' do
-    action.call(params)
-    item = repository.last
+  describe 'with valid params' do
+    let(:params) { Hash[item: { list_id: @new_list.id, text: 'Mushrooms', done: false }] }
 
-    item.id.wont_be_nil
-    item.text.must_equal params.dig(:item, :text)
+    it 'creates a new item' do
+      action.call(params)
+      new_item = item.last
+
+      new_item.id.wont_be_nil
+      new_item.text.must_equal params.dig(:item, :text)
+      @new_list = list.find_items(@new_list.id)
+      @new_list.items.must_equal [new_item]
+    end
+
+    it 'redirects to index' do
+      response = action.call(params)
+
+      response[0].must_equal 302
+      response[1]['Location'].must_equal '/home/index'
+    end
   end
 
-  it 'redirects the user to the home page' do
-    response = action.call(params)
+  describe 'with invalid params' do
+    let(:params) { Hash[item: {}] }
 
-    response[0].must_equal 302
-    response[1]['Location'].must_equal '/'
+    it 'redirects to index' do
+      response = action.call(params)
+
+      response[0].must_equal 302
+      response[1]['Location'].must_equal '/home/index'
+    end
   end
 end
+

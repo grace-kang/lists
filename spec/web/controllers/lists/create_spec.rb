@@ -2,25 +2,42 @@ require_relative '../../../spec_helper'
 
 describe Web::Controllers::Lists::Create do
   let(:action) { Web::Controllers::Lists::Create.new }
-  let(:params) { Hash[list: { name: 'Groceries' }] }
-  let(:repository) { ListRepository.new }
+  include Import['repositories.user']
+  include Import['repositories.list']
 
   before do
-    repository.clear
+    user.clear
+    list.clear
+
+    @new_user = user.create(email: 'test', hashed_pass: 'test')
   end
 
-  it 'creates a new list' do
-    action.call(params)
-    list = repository.last
+  describe 'with valid params' do
+    let(:params) { Hash[list: { name: 'Groceries', user_id: @new_user.id }] }
+    it 'creates a new list' do
+      action.call(params)
+      new_list = list.last
 
-    list.id.wont_be_nil
-    list.name.must_equal params.dig(:list, :name)
+      new_list.id.wont_be_nil
+      new_list.name.must_equal params.dig(:list, :name)
+    end
+
+    it 'redirects the user to the home page' do
+      response = action.call(params)
+
+      response[0].must_equal 302
+      response[1]['Location'].must_equal '/home/index'
+    end
   end
 
-  it 'redirects the user to the home page' do
-    response = action.call(params)
+  describe 'with invalid params' do
+    let(:params) { Hash[list: {}] }
 
-    response[0].must_equal 302
-    response[1]['Location'].must_equal '/'
+    it 'redirects to index' do
+      response = action.call(params)
+
+      response[0].must_equal 302
+      response[1]['Location'].must_equal '/home/index'
+    end
   end
 end
