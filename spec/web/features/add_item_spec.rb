@@ -1,7 +1,7 @@
 require 'features_helper'
 
 describe 'Add an item' do
-  let (:list) { ListRepository.new.create(name: 'list') }
+  let(:list) { ListRepository.new.create(name: 'list') }
 
   after do
     ItemRepository.new.clear
@@ -19,3 +19,4 @@ describe 'Add an item' do
     assert page.has_content?('Some text')
   end
 end
+
