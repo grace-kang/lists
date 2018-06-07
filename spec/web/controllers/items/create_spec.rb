@@ -16,14 +16,14 @@ describe Web::Controllers::Items::Create do
   end
 
   describe 'with valid params' do
-    let(:params) { Hash[item: { list_id: @new_list.id, text: 'Mushrooms', done: false }] }
+    let(:params) { Hash[newitem: { list_id: @new_list.id, text: 'Mushrooms', done: false }] }
 
     it 'creates a new item' do
       action.call(params)
       new_item = item.last
 
       new_item.id.wont_be_nil
-      new_item.text.must_equal params.dig(:item, :text)
+      new_item.text.must_equal params.dig(:newitem, :text)
       @new_list = list.find_items(@new_list.id)
       @new_list.items.must_equal [new_item]
     end
@@ -37,7 +37,7 @@ describe Web::Controllers::Items::Create do
   end
 
   describe 'with invalid params' do
-    let(:params) { Hash[item: {}] }
+    let(:params) { Hash[] }
 
     it 'redirects to index' do
       response = action.call(params)
