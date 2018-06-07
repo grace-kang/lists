@@ -4,7 +4,6 @@ module Web::Controllers::Lists
     include Import['repositories.list']
 
     def call(params)
-      puts params[:list]
       list.delete(params[:list][:id])
 
       redirect_to '/home/index'
