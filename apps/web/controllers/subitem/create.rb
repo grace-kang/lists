@@ -4,7 +4,7 @@ module Web::Controllers::Subitem
     include Import['repositories.subitem']
 
     params do
-      required(:subitem).schema do
+      required(:newsubitem).schema do
         required(:text).filled(:str?)
         required(:item_id).filled(:int?)
 				required(:done).filled(:bool?)
@@ -13,7 +13,7 @@ module Web::Controllers::Subitem
 
     def call(params)
       if params.valid?
-        subitem.create(params[:subitem])
+        subitem.create(params[:newsubitem])
 
         redirect_to '/home/index'
       else

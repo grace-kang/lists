@@ -2,7 +2,6 @@ module Web::Controllers::Lists
   class Create
     include Web::Action
 
-    puts Application.keys
     include Import['repositories.list']
 
     expose :user
@@ -22,7 +21,6 @@ module Web::Controllers::Lists
         redirect_to '/home/index'
       else
         redirect_to '/home/index'
-        self.status = 422
       end
     end
   end

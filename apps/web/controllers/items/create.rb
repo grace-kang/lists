@@ -4,7 +4,7 @@ module Web::Controllers::Items
     include Import['repositories.item']
 
     params do
-      required(:item).schema do
+      required(:newitem).schema do
         required(:text).filled(:str?)
         required(:list_id).filled(:int?)
 				required(:done).filled(:bool?)
@@ -13,7 +13,7 @@ module Web::Controllers::Items
 
     def call(params)
       if params.valid?
-        item.create(params[:item])
+        item.create(params[:newitem])
 
         redirect_to '/home/index'
       else
