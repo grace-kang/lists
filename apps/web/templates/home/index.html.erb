@@ -30,7 +30,7 @@
             <%# hidden list rename form %>
             <div name="list_form" style="display:none">
               <%=
-                form_for :list, '/lists/rename' do
+                form_for :rename_list, '/lists/rename' do
                   text_field :name, autofocus: 'autofocus', class: "border shadow parent w-full text-grey-darker py-2 px-3", placeholder: 'New Name'
                   hidden_field :id, value: list.id
                   submit ''
