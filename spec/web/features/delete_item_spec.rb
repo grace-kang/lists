@@ -1,6 +1,6 @@
 require 'features_helper'
 
-describe 'Add an item' do
+describe 'Delete an item' do
   include Import['repositories.user']
   include Import['repositories.list']
   include Import['repositories.item']
@@ -12,14 +12,13 @@ describe 'Add an item' do
 
     @user = user.create(email: 'email', hashed_pass: hashed_password('pass'))
     @list = list.create(user_id: @user.id, name: 'Groceries')
+    @mushrooms = item.create(list_id: @list.id, text: 'Mushrooms', done: false)
   end
 
-  it 'can create a new item' do
+  it 'deletes an existing item' do
     visit '/'
-
     click_button 'Log In'
-
-    current_path.must_equal('/sessions/new')
+    current_path.must_equal '/sessions/new'
 
     within 'form#session-form' do
       fill_in 'Email', with: @user.email
@@ -27,13 +26,12 @@ describe 'Add an item' do
       click_button 'Log In'
     end
 
-    within 'form#newitem-form' do
-      fill_in 'New Item', with: 'Some text'
-      click_button 'Add'
+    current_path.must_equal '/home/index'
+    page.html.must_include 'Mushrooms'
+    within 'form#delete_item-form' do
+      click_button 'x'
     end
 
-    current_path.must_equal('/home/index')
-    assert page.has_content?('Some text')
+    page.html.wont_include 'Mushrooms'
   end
 end
-

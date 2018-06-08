@@ -8,7 +8,7 @@ module Web::Controllers::Lists
     expose :list
 
     params do
-      required(:list).schema do
+      required(:new_list).schema do
         required(:user_id).filled(:int?)
         required(:name).filled(:str?)
       end
@@ -16,7 +16,7 @@ module Web::Controllers::Lists
 
     def call(params)
       if params.valid?
-        list.create(params[:list])
+        list.create(params[:new_list])
 
         redirect_to '/home/index'
       else

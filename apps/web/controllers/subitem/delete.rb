@@ -4,7 +4,7 @@ module Web::Controllers::Subitem
     include Import['repositories.subitem']
 
     def call(params)
-      subitem.delete(params[:subitem][:id])
+      subitem.delete(params[:delete_subitem][:id])
       redirect_to '/home/index'
     end
   end

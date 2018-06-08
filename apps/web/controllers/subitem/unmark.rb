@@ -4,7 +4,7 @@ module Web::Controllers::Subitem
     include Import['repositories.subitem']
 
     def call(params)
-			subitem_id = params[:subitem][:id]
+			subitem_id = params[:unmark_subitem][:id]
 			subitem.update(subitem_id, done: false)
 			redirect_to '/home/index'
     end

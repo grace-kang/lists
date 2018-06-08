@@ -1,7 +1,6 @@
 require 'features_helper'
 
 describe 'Add a list' do
-  include Hanami::Tachiban
   include Import['repositories.user']
   include Import['repositories.list']
 
@@ -27,7 +26,7 @@ describe 'Add a list' do
 
     current_path.must_equal('/home/index')
 
-    within 'form#list-form' do
+    within 'form#new_list-form' do
       fill_in 'List Name', with: 'Some name'
       click_button 'Create'
     end

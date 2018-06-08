@@ -4,7 +4,7 @@ module Web::Controllers::Items
     include Import['repositories.item']
 
     def call(params)
-		  item_id = params[:item][:id]
+		  item_id = params[:unmark_item][:id]
 			item.update(item_id, done: false)
 			redirect_to '/home/index'
     end

@@ -1,7 +1,6 @@
 require 'features_helper'
 
 describe 'List lists' do
-  include Hanami::Tachiban
   include Import['repositories.user']
   include Import['repositories.list']
   include Import['repositories.item']

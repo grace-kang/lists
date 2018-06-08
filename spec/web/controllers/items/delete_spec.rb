@@ -18,7 +18,7 @@ describe Web::Controllers::Items::Delete do
   end
 
   describe 'with valid item_id' do
-    let(:params) { Hash[item: {id: @this_item.id}] }
+    let(:params) { Hash[delete_item: {id: @this_item.id}] }
 
     it 'deletes the item and redirects to home' do
       response = action.call(params)

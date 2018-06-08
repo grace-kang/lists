@@ -8,4 +8,5 @@ Capybara.app = Hanami.app
 
 class MiniTest::Spec
   include Capybara::DSL
+  include Hanami::Tachiban
 end

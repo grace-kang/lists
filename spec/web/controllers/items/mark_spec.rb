@@ -17,7 +17,7 @@ describe Web::Controllers::Items::Mark do
     @this_item = item.create(list_id: @list.id, text: 'Mushrooms', done: false)
   end
 
-  let(:params) { Hash[item: {id: @this_item.id}] }
+  let(:params) { Hash[mark_item: {id: @this_item.id}] }
 
   it 'marks item and redirects to index' do
     response = action.call(params)

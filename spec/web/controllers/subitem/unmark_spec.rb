@@ -21,7 +21,7 @@ describe Web::Controllers::Subitem::Unmark do
   end
 
   describe 'given the marked subitems id' do
-    let(:params) { Hash[subitem: {id: @sugar.id}] }
+    let(:params) { Hash[unmark_subitem: {id: @sugar.id}] }
 
     it 'unmarks the subitem and redirects to index' do
       response = action.call(params)

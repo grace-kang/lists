@@ -13,13 +13,13 @@ describe Web::Controllers::Lists::Create do
   end
 
   describe 'with valid params' do
-    let(:params) { Hash[list: { name: 'Groceries', user_id: @new_user.id }] }
+    let(:params) { Hash[new_list: { name: 'Groceries', user_id: @new_user.id }] }
     it 'creates a new list' do
       action.call(params)
       new_list = list.last
 
       new_list.id.wont_be_nil
-      new_list.name.must_equal params.dig(:list, :name)
+      new_list.name.must_equal params.dig(:new_list, :name)
     end
 
     it 'redirects the user to the home page' do

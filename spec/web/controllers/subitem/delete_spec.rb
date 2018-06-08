@@ -21,7 +21,7 @@ describe Web::Controllers::Subitem::Delete do
   end
 
   describe 'given the subitem id' do
-    let(:params) { Hash[subitem: {id: @flour.id}] }
+    let(:params) { Hash[delete_subitem: {id: @flour.id}] }
     
     it 'deletes the subitem' do
       subitem.find(@flour.id).wont_be_nil

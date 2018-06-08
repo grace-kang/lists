@@ -14,7 +14,7 @@ describe Web::Controllers::Lists::Delete do
     @this_list = list.create(user_id: @user.id, name: 'Groceries')
   end
 
-  let(:params) { Hash[list: {id: @this_list.id}] }
+  let(:params) { Hash[delete_list: {id: @this_list.id}] }
 
   it 'deletes the list and redirects to index' do
     response = action.call(params)

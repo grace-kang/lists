@@ -4,7 +4,7 @@ module Web::Controllers::Items
     include Import['repositories.item']
 
     def call(params)
-      item.delete(params[:item][:id])
+      item.delete(params[:delete_item][:id])
 
       redirect_to '/home/index'
     end

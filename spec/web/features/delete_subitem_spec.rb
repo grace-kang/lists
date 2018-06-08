@@ -1,6 +1,6 @@
 require 'features_helper'
 
-describe 'Add a subitem' do
+describe 'Delete a subitem' do
   include Import['repositories.user']
   include Import['repositories.list']
   include Import['repositories.item']
@@ -15,33 +15,26 @@ describe 'Add a subitem' do
     @user = user.create(email: 'email', hashed_pass: hashed_password('pass'))
     @list = list.create(user_id: @user.id, name: 'Groceries')
     @item = item.create(list_id: @list.id, text: 'Cake', done: false)
-  end
+    subitem.create(item_id: @item.id, text: 'Sugar', done: false)
 
-  it 'can create a new subitem' do
     visit '/'
-
     click_button 'Log In'
-
-    current_path.must_equal('/sessions/new')
-
     within 'form#session-form' do
-      fill_in 'Email', with: @user.email
+      fill_in 'Email', with: 'email'
       fill_in 'Password', with: 'pass'
       click_button 'Log In'
     end
+  end
 
-    current_path.must_equal('/home/index')
-
-    click_button '+'
-
-    Capybara.ignore_hidden_elements = false
-    within 'form#newsubitem-form' do
-      fill_in 'New Subitem', with: 'Some text'
-      click_button 'Add'
+  it 'deletes the specified subitem' do
+    current_path.must_equal '/home/index'
+    page.html.must_include 'Sugar'
+    within 'form#delete_subitem-form' do
+      click_button 'x'
     end
-    Capybara.ignore_hidden_elements = true
 
-    current_path.must_equal('/home/index')
-    assert page.has_content?('Some text')
+    page.html.wont_include 'Sugar'
   end
 end
+
+

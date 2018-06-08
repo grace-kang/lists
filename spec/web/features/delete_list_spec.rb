@@ -1,39 +1,33 @@
 require 'features_helper'
 
-describe 'Add an item' do
+describe 'Delete a list' do
   include Import['repositories.user']
   include Import['repositories.list']
-  include Import['repositories.item']
 
   before do
     user.clear
     list.clear
-    item.clear
 
     @user = user.create(email: 'email', hashed_pass: hashed_password('pass'))
     @list = list.create(user_id: @user.id, name: 'Groceries')
-  end
 
-  it 'can create a new item' do
     visit '/'
-
     click_button 'Log In'
-
-    current_path.must_equal('/sessions/new')
 
     within 'form#session-form' do
       fill_in 'Email', with: @user.email
       fill_in 'Password', with: 'pass'
       click_button 'Log In'
     end
+  end
 
-    within 'form#newitem-form' do
-      fill_in 'New Item', with: 'Some text'
-      click_button 'Add'
+  it 'can delete an existing list' do
+    current_path.must_equal '/home/index'
+    page.html.must_include 'Groceries'
+    within 'form#delete_list-form' do
+      click_button 'X'
     end
 
-    current_path.must_equal('/home/index')
-    assert page.has_content?('Some text')
+    page.html.wont_include 'Groceries'
   end
 end
-
