@@ -3,7 +3,7 @@ get '/home/index', to: 'home#index'
 
 resources :users, only: [:new, :create] do
   collection do
-    post 'new', as: 'redirect_login'
+    post 'new'
   end
 end
 
