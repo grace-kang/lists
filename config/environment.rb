@@ -39,6 +39,16 @@ Hanami.configure do
   environment :development do
     # See: http://hanamirb.org/guides/projects/logging
     logger level: :debug
+    mailer do
+      delivery :smtp, 
+      address: ENV.fetch('SMTP_HOST'), 
+      port: ENV.fetch('SMTP_PORT'), 
+      domain: "gmail.com", 
+      user_name: ENV.fetch('SMTP_USERNAME'), 
+      password: ENV.fetch('SMTP_PASSWORD'),
+      authentication: "plain",
+      enable_starttls_auto: true
+    end
   end
 
   environment :production do

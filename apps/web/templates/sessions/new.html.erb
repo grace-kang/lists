@@ -4,7 +4,7 @@
   <%=
     form_for :session, '/sessions', class: 'flex-col' do
       div do
-        text_field :email, class: 'border shadow parent w-full text-grey-darker py-2 px-3 my-2', placeholder: 'Email'
+        email_field :email, class: 'border shadow parent w-full text-grey-darker py-2 px-3 my-2', placeholder: 'Email'
       end
 
       div do
