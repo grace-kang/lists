@@ -41,12 +41,12 @@ module Web
       # URI scheme used by the routing system to generate absolute URLs
       # Defaults to "http"
       #
-      # scheme 'https'
+      scheme 'https'
 
       # URI host used by the routing system to generate absolute URLs
       # Defaults to "localhost"
       #
-      # host 'lists-web-app.herokuapp.com'
+      host 'lists-web-app.herokuapp.com'
 
       # URI port used by the routing system to generate absolute URLs
       # Argument: An object coercible to integer, defaults to 80 if the scheme
@@ -54,7 +54,7 @@ module Web
       #
       # This should only be configured if app listens to non-standard ports
       #
-      # port 443
+      port 443
 
       # Enable cookies
       # Argument: boolean to toggle the feature
@@ -294,9 +294,9 @@ module Web
     # PRODUCTION
     #
     configure :production do
-      # scheme 'https'
-      # host   'lists-web-app.herokuapp.com'
-      # port   443
+      scheme 'https'
+      host   'lists-web-app.herokuapp.com'
+      port   443
 
       assets do
         # Don't compile static assets in production mode (eg. Sass, ES6)
