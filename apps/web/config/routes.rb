@@ -1,20 +1,15 @@
 root to: 'home#login' 
 get '/home/index', to: 'home#index'
 
-resources :users, only: [:new, :create] do
-  collection do
-    post 'new'
-  end
-end
+resources :users, only: [:new, :create] 
 
 resources :sessions, only: [:new, :create, :destroy]
 
-resources :lists, only: [:create, :destroy, :update]
+resources :lists, only: [:create, :destroy, :update] 
 
 get '/users/confirm/:token', to: 'users#confirm', as: :confirm_email
 
 post '/items', to: 'items#create'
-post '/lists', to: 'lists#create'
 post '/items/delete', to: 'items#delete'
 post '/lists/delete', to: 'lists#delete'
 get '/items/mark', to: 'items#mark'
@@ -22,8 +17,8 @@ post '/items/mark', to: 'items#mark'
 get '/items/unmark', to: 'items#unmark'
 post '/items/unmark', to: 'items#unmark'
 post '/subitem', to: 'subitem#create'
-get '/lists/rename', to: 'lists#rename'
-post '/lists/rename', to: 'lists#rename'
+# get '/lists/rename', to: 'lists#rename'
+# post '/lists/rename', to: 'lists#rename'
 get '/subitem/mark', to: 'subitem#mark'
 post '/subitem/mark', to: 'subitem#mark'
 get '/subitem/unmark', to: 'subitem#unmark'

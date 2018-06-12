@@ -14,11 +14,11 @@ module Web::Controllers::Sessions
           redirect_to '/home/index'
         else
           flash[:login_error] = 'Please check your email to confirm your registration.'
-          redirect_to '/sessions/new'
+          redirect_to routes.path(:new_session)
         end
       else
         flash[:login_error] = 'Log in failed. Please try again.'
-        redirect_to 'sessions/new'
+        redirect_to routes.path(:new_session)
       end
     end
   end
