@@ -20,7 +20,7 @@ module Web::Controllers::Users
 
         if user.find_by_email(email)
           flash[:email] = 'That email has been taken. Please try again.'
-          redirect_to '/users/new'
+          redirect_to routes.path(:new_user)
         else
           token = SecureRandom.urlsafe_base64.to_s
           @user = user.create(email: email, hashed_pass: hashed_pass, email_confirmed: false, token: token)
