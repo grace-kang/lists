@@ -41,8 +41,8 @@ Hanami.configure do
     logger level: :debug
     mailer do
       delivery :smtp, 
-      address: "smtp.gmail.com", 
-      port: 587,
+      address: ENV.fetch('SMTP_HOST'), 
+      port: ENV.fetch('SMTP_PORT'),
       domain: "gmail.com", 
       user_name: "listswebapp@gmail.com", 
       password: "xena2616", 
@@ -56,8 +56,8 @@ Hanami.configure do
 
     mailer do
       delivery :smtp, 
-      address: "smtp.gmail.com", 
-      port: 587,
+      address: ENV.fetch('SMTP_HOST'), 
+      port: ENV.fetch('SMTP_PORT'),
       domain: "gmail.com", 
       user_name: "listswebapp@gmail.com", 
       password: "xena2616",

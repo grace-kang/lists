@@ -294,9 +294,9 @@ module Web
     # PRODUCTION
     #
     configure :production do
-      # scheme 'https'
-      # host   'example.org'
-      # port   443
+      scheme 'https'
+      host   'lists-web-app.herokuapp.com'
+      port   443
 
       assets do
         # Don't compile static assets in production mode (eg. Sass, ES6)
@@ -314,7 +314,7 @@ module Web
         # See: http://hanamirb.org/guides/assets/content-delivery-network
         #
         # scheme 'https'
-        # host   'cdn.example.org'
+        # host   'lists-web-app.herokuapp.com'
         # port   443
 
         # Subresource Integrity
