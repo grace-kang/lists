@@ -46,7 +46,7 @@ module Web
       # URI host used by the routing system to generate absolute URLs
       # Defaults to "localhost"
       #
-      host 'http://lists-web-app.herokuapp.com'
+      host 'https://lists-web-app.herokuapp.com'
 
       # URI port used by the routing system to generate absolute URLs
       # Argument: An object coercible to integer, defaults to 80 if the scheme
