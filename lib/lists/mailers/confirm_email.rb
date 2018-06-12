@@ -6,8 +6,6 @@ class Mailers::ConfirmEmail
   to      :recipient
   subject 'Confirm Your Email Address'
 
-  private
-
   def recipient
     user.email
   end
