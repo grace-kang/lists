@@ -4,7 +4,7 @@ require 'hanami/model'
 require_relative '../lib/lists'
 require_relative '../apps/web/application'
 require_relative '../system/import'
-require "letter_opener"
+# require "letter_opener"
 
 Hanami.configure do
   mount Web::Application, at: '/'
@@ -39,9 +39,6 @@ Hanami.configure do
   environment :development do
     # See: http://hanamirb.org/guides/projects/logging
     logger level: :debug
-    mailer do
-      delivery LetterOpener::DeliveryMethod, location: Hanami.root.join('tmp/letter_opener')
-    end
   end
 
   environment :production do

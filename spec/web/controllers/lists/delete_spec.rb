@@ -10,7 +10,7 @@ describe Web::Controllers::Lists::Delete do
     user.clear
     list.clear
 
-    @user = user.create(email: 'test', hashed_pass: hashed_password('pass'))
+    @user = user.create(email: 'test', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'token')
     @this_list = list.create(user_id: @user.id, name: 'Groceries')
   end
 

@@ -14,7 +14,7 @@ describe SubitemRepository do
     list.clear
     item.clear
 
-    @user = user.create(email: 'test', hashed_pass: hashed_password('pass'))
+    @user = user.create(email: 'test', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'token')
     @list = list.create(user_id: @user.id, name: 'Groceries')
     @item = item.create(list_id: @list.id, text: 'Cake', done: false)
   end

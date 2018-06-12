@@ -5,7 +5,7 @@ module Web::Controllers::Users
 
     def call(params)
       this_user = user.find_by_token(params[:token])
-      if user
+      if this_user
         user.update(this_user.id, email_confirmed: true)
         flash[:confirmed] = 'Successfully confirmed email! You may log in.'
         redirect_to '/'

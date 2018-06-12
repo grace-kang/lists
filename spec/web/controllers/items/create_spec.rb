@@ -11,7 +11,7 @@ describe Web::Controllers::Items::Create do
     list.clear
     item.clear
 
-    @this_user = user.create(email: 'test', hashed_pass: 'test')
+    @this_user = user.create(email: 'test', hashed_pass: 'test', email_confirmed: true, token: 'token')
     @new_list = list.create(name: 'Groceries', user_id: @this_user.id)
   end
 

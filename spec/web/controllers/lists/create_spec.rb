@@ -9,7 +9,7 @@ describe Web::Controllers::Lists::Create do
     user.clear
     list.clear
 
-    @new_user = user.create(email: 'test', hashed_pass: 'test')
+    @new_user = user.create(email: 'test', hashed_pass: 'test', email_confirmed: true, token: 'token')
   end
 
   describe 'with valid params' do

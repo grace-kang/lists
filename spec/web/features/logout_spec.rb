@@ -5,7 +5,7 @@ describe 'Destroy a session' do
 
   before do
     user.clear
-    user.create(email: 'email', hashed_pass: hashed_password('pass'))
+    user.create(email: 'email', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'token')
     visit '/'
     click_button 'Log In'
     within 'form#session-form' do

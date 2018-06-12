@@ -12,7 +12,7 @@ describe 'Add a user' do
 
     click_button 'Sign Up'
 
-    current_path.must_equal '/users/signup'
+    current_path.must_equal '/users/new'
 
     within 'form#user-form' do
       fill_in 'Email', with: 'email'

@@ -43,7 +43,7 @@ describe Web::Controllers::Users::Create do
       response = action.call(params)
       
       response[0].must_equal 302
-      response[1]['Location'].must_equal '/users/signup'
+      response[1]['Location'].must_equal '/users/new'
     end
   end
 end

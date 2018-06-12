@@ -8,7 +8,7 @@ describe Web::Controllers::Sessions::Create do
   before do
     user.clear
 
-    @user = user.create(email: 'test', hashed_pass: hashed_password('test'))
+    @user = user.create(email: 'test', hashed_pass: hashed_password('test'), email_confirmed: true, token: 'token')
   end
 
   describe 'with valid params' do

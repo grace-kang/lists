@@ -13,7 +13,7 @@ describe ItemRepository do
     @repository = ItemRepository.new
     @repository.clear
 
-    @user = user.create(email: 'test', hashed_pass: hashed_password('pass'))
+    @user = user.create(email: 'test', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'token')
     @list = list.create(user_id: @user.id, name: 'Groceries')
   end
 

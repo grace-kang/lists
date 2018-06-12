@@ -14,7 +14,7 @@ describe Web::Views::Home::Index do
     subitem.clear
   end
 
-  let(:current_user) { user.create(email: 'email', hashed_pass: hashed_password('pass'))}
+  let(:current_user) { user.create(email: 'email', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'sometoken')}
   let(:exposures) { Hash[lists: [], this_user: current_user, params: {}] }
   let(:template)  { Hanami::View::Template.new('apps/web/templates/home/index.html.erb') }
   let(:view)      { Web::Views::Home::Index.new(template, exposures) }

@@ -6,7 +6,7 @@ describe List do
 
   before do
     user.clear
-    @user = user.create(email: 'email', hashed_pass: hashed_password('pass'))
+    @user = user.create(email: 'email', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'token')
   end
 
   it 'can be initialized with a name' do

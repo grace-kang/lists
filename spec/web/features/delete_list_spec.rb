@@ -8,7 +8,7 @@ describe 'Delete a list' do
     user.clear
     list.clear
 
-    @user = user.create(email: 'email', hashed_pass: hashed_password('pass'))
+    @user = user.create(email: 'email', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'token')
     @list = list.create(user_id: @user.id, name: 'Groceries')
 
     visit '/'

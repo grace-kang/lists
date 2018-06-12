@@ -5,7 +5,7 @@ describe 'Create a new session' do
 
   before do
     user.clear
-    user.create(email: 'email', hashed_pass: hashed_password('pass'))
+    user.create(email: 'email', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'token')
   end
 
   it 'can log in a user' do

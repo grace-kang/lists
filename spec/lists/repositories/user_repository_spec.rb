@@ -8,7 +8,7 @@ describe UserRepository do
     @repository = UserRepository.new
     @repository.clear
 
-    @user = @repository.create(email: 'email', hashed_pass: hashed_password('pass'))
+    @user = @repository.create(email: 'email', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'token')
   end
 
   it 'creates a new user with attributes' do

@@ -14,7 +14,7 @@ describe Web::Controllers::Home::Index do
     item.clear
     subitem.clear
 
-    @this_user = user.create(email: 'email', hashed_pass: hashed_password('pass'))
+    @this_user = user.create(email: 'email', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'token')
     @list = list.create(name: 'Groceries', user_id: @this_user.id)
     @item = item.create(text: 'Fudge ingredients', list_id: @list.id, done: false)
     @subitem = subitem.create(text: 'Flour', item_id: @item.id, done: false)
