@@ -18,7 +18,7 @@ module Web::Controllers::Sessions
         end
       else
         flash[:login_error] = 'Log in failed. Please try again.'
-        redirect_to routes.new_session_path 
+        redirect_to routes.redirect_login_path 
       end
     end
   end
