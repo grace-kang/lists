@@ -10,7 +10,7 @@
 <div class="flex justify-center">
   <div class="login button">
     <%=
-      form_for :login, '/sessions/new' do
+      form_for :login, '/sessions/new', method: 'GET' do
         submit 'Log In', class: 'bg-grey mt-8 hover:bg-grey-dark font-semibold text-white py-2 px-3 mx-6 rounded'
       end
     %>
@@ -18,7 +18,7 @@
 
   <div class="signup button">
     <%=
-      form_for :signup, '/users/signup' do
+      form_for :signup, '/users/new', method: 'GET' do
         submit 'Sign Up', class: 'bg-grey mt-8 hover:bg-grey-dark font-semibold text-white py-2 px-3 mx-6 rounded'
       end
     %>

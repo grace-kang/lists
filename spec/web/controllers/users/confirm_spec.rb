@@ -1,7 +1,7 @@
 require_relative '../../../spec_helper'
 
-describe Web::Controllers::Users::Signup do
-  let(:action) { Web::Controllers::Users::Signup.new }
+describe Web::Controllers::User::Confirm do
+  let(:action) { Web::Controllers::User::Confirm.new }
   let(:params) { Hash[] }
 
   it 'is successful' do

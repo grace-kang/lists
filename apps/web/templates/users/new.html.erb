@@ -33,7 +33,7 @@
 </div>
 
 <%=
-  form_for :login, '/sessions/new', class: 'flex justify-center' do
+  form_for :login, '/sessions/new', class: 'flex justify-center', method: 'GET' do
     submit 'Log In', class: 'text-grey-dark hover:bg-grey-light text-sm rounded border-2 mt-4 py-1 px-2'
   end
 %>

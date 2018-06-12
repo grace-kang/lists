@@ -1,0 +1,9 @@
+<body>
+<h3>Hi <%= user.email %>,</h3>
+
+<p>Thank you for signing up!</br>
+To confirm your registration, click the URL below.<br><br>
+
+<%= link_to 'Confirm Email', Web.routes.url(:confirm_email, token: user.token) %>
+</p>
+</body>

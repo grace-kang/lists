@@ -124,14 +124,22 @@ GEM
       url_mount (~> 0.2.1)
     ice_nine (0.11.2)
     inflecto (0.0.2)
+    launchy (2.4.3)
+      addressable (~> 2.3)
+    letter_opener (1.6.0)
+      launchy (~> 2.2)
     mail (2.7.0)
       mini_mime (>= 0.1.1)
+    method_source (0.9.0)
     mini_mime (1.0.0)
     mini_portile2 (2.3.0)
     minitest (5.11.3)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     pg (1.0.0)
+    pry (0.11.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
     public_suffix (3.0.2)
     rack (2.0.5)
     rack-test (1.0.0)
@@ -183,8 +191,10 @@ DEPENDENCIES
   hanami (~> 1.2)
   hanami-model (~> 1.2)
   hanami-webconsole
+  letter_opener
   minitest
   pg
+  pry
   rake
   shotgun
   tachiban

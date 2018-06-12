@@ -7,12 +7,14 @@ gem 'pg'
 gem 'rake'
 gem 'tachiban'
 gem 'dry-system'
+gem 'pry'
 
 group :development do
   # Code reloading
   # See: http://hanamirb.org/guides/projects/code-reloading
   gem 'hanami-webconsole'
   gem 'shotgun', platforms: :ruby
+  gem 'letter_opener'
 end
 
 group :test, :development do

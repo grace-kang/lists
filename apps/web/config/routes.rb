@@ -1,18 +1,22 @@
-root to: 'home#login'
+root to: 'home#login' 
+get '/home/index', to: 'home#index'
+
+resources :users, only: [:new, :create] do
+  member do
+    # get 'confirm/:token', to: 'users#confirm', as: :confirm_email
+  end
+end
+
+resources :sessions, only: [:new, :create, :destroy]
+
+resources :lists, only: [:create, :destroy, :update]
+
+get '/users/confirm/:token', to: 'users#confirm', as: :confirm_email
+
 post '/items', to: 'items#create'
 post '/lists', to: 'lists#create'
 post '/items/delete', to: 'items#delete'
 post '/lists/delete', to: 'lists#delete'
-get '/users/signup', to: 'users#signup'
-post '/users/signup', to: 'users#signup'
-post '/users', to: 'users#create'
-get '/sessions/new', to: 'sessions#new'
-post '/sessions/new', to: 'sessions#new'
-post '/sessions', to: 'sessions#create'
-delete '/sessions/logout', to: 'sessions#destroy'
-post '/sessions/logout', to: 'sessions#destroy'
-get '/home/index', to: 'home#index'
-post '/users/email_error', to: 'users#email_error'
 get '/items/mark', to: 'items#mark'
 post '/items/mark', to: 'items#mark'
 get '/items/unmark', to: 'items#unmark'

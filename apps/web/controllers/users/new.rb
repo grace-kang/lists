@@ -1,5 +1,5 @@
 module Web::Controllers::Users
-  class Signup
+  class New
     include Web::Action
 
     def call(params); end

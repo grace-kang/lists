@@ -23,7 +23,7 @@
 </div>
 
 <%=
-  form_for :signup, '/users/signup', class: 'flex justify-center' do
+  form_for :signup, '/users/new', class: 'flex justify-center', method: 'GET' do
     submit 'Sign Up', class: 'text-grey-dark hover:bg-grey-light text-sm rounded border-2 mt-4 py-1 px-2'
   end
 %>

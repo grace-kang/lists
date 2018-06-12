@@ -9,8 +9,13 @@ module Web::Controllers::Sessions
 
       @user = user.find_by_email(email)
       if authenticated?(password)
-        login('Success')
-        redirect_to '/home/index'
+        if @user.email_confirmed
+          login('Success')
+          redirect_to '/home/index'
+        else
+          flash[:login_error] = 'Please check your email to confirm your registration.'
+          redirect_to '/sessions/new'
+        end
       else
         flash[:login_error] = 'Log in failed. Please try again.'
         redirect_to '/sessions/new'

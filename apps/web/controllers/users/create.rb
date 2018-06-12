@@ -20,16 +20,18 @@ module Web::Controllers::Users
 
         if user.find_by_email(email)
           flash[:email] = 'That email has been taken. Please try again.'
-          redirect_to '/users/signup'
+          redirect_to '/users/new'
         else
-          @user = user.create(email: email, hashed_pass: hashed_pass)
-          flash[:signup_success] = 'Successfully signed up! Please log in.'
+          token = SecureRandom.urlsafe_base64.to_s
+          @user = user.create(email: email, hashed_pass: hashed_pass, email_confirmed: false, token: token)
+          Mailers::ConfirmEmail.deliver(user: @user)
+          flash[:signup_success] = 'Successfully signed up! Please check your email to confirm your registration.'
           redirect_to '/'
         end
 
       else
         flash[:input_errors] = params.error_messages
-        redirect_to '/users/signup'
+        redirect_to '/users/new'
       end
     end
   end
