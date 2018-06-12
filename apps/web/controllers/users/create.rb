@@ -26,12 +26,12 @@ module Web::Controllers::Users
           @user = user.create(email: email, hashed_pass: hashed_pass, email_confirmed: false, token: token)
           Mailers::ConfirmEmail.deliver(user: @user)
           flash[:signup_success] = 'Successfully signed up! Please check your email to confirm your registration.'
-          redirect_to '/'
+          redirect_to routes.path(:root)
         end
 
       else
         flash[:input_errors] = params.error_messages
-        redirect_to '/users/new'
+        redirect_to routes.path(:new_user)
       end
     end
   end
