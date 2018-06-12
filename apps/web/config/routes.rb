@@ -2,8 +2,8 @@ root to: 'home#login'
 get '/home/index', to: 'home#index'
 
 resources :users, only: [:new, :create] do
-  member do
-    # get 'confirm/:token', to: 'users#confirm', as: :confirm_email
+  collection do
+    post 'new'
   end
 end
 
