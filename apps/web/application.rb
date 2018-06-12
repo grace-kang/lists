@@ -27,7 +27,7 @@ module Web
       # Defaults to true.
       # See: http://www.rubydoc.info/gems/hanami-controller/#Exceptions_management
       #
-      handle_exceptions true
+      # handle_exceptions true
 
       ##
       # HTTP
@@ -71,7 +71,7 @@ module Web
       #               See #scheme and #ssl?
       #   :httponly - Prevent JavaScript access (Boolean - true by default)
       #
-      cookies true
+      # cookies true
       # or
       # cookies max_age: 300
 
