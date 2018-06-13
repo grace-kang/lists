@@ -1,5 +1,5 @@
 module Web::Views::Lists
-  class Rename
+  class Update
     include Web::View
   end
 end

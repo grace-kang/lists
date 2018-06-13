@@ -11,6 +11,7 @@ module Web::Controllers::Lists
       required(:new_list).schema do
         required(:user_id).filled(:int?)
         required(:name).filled(:str?)
+        required(:done).filled(:bool?)
       end
     end
 

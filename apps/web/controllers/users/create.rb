@@ -24,7 +24,6 @@ module Web::Controllers::Users
         else
           token = SecureRandom.urlsafe_base64.to_s
           new_user = user.create(email: email, hashed_pass: hashed_pass, email_confirmed: false, token: token)
-          puts new_user
           Mailers::ConfirmEmail.deliver(user: new_user)
           flash[:signup_success] = 'Successfully signed up! Please check your email to confirm your registration.'
           redirect_to routes.path(:root)

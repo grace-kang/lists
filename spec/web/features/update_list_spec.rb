@@ -1,6 +1,6 @@
 require 'features_helper'
 
-describe 'Rename a list' do
+describe 'update a list' do
   include Import['repositories.user']
   include Import['repositories.list']
 
@@ -9,7 +9,7 @@ describe 'Rename a list' do
     list.clear
 
     @user = user.create(email: 'email', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'token')
-    @groceries = list.create(user_id: @user.id, name: 'Groceries')
+    @groceries = list.create(user_id: @user.id, name: 'Groceries', done: false)
 
     visit '/'
     click_button 'Log In'
@@ -20,13 +20,13 @@ describe 'Rename a list' do
     end
   end
 
-  it 'can rename an existing list' do
+  it 'can update an existing list' do
     current_path.must_equal '/home/index'
     page.html.must_include 'Groceries'
     click_button 'Groceries'
     
     Capybara.ignore_hidden_elements = false
-    within 'form#rename_list-form' do
+    within 'form#update_list-form' do
       fill_in 'New Name', with: 'Chores'
       click_button ''
     end

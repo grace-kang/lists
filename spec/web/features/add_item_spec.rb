@@ -11,7 +11,7 @@ describe 'Add an item' do
     item.clear
 
     @user = user.create(email: 'email', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'token')
-    @list = list.create(user_id: @user.id, name: 'Groceries')
+    @list = list.create(user_id: @user.id, name: 'Groceries', done: false)
   end
 
   it 'can create a new item' do

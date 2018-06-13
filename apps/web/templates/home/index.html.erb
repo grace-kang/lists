@@ -12,6 +12,7 @@
       form_for :new_list, '/lists', class: "w-full max-w-xs" do
         text_field :name, class: "border shadow parent text-grey-darker py-2 px-3 my-2", placeholder: 'List Name'
         hidden_field :user_id, value: this_user.id
+        hidden_field :done, value: false
         submit 'Create', class:"bg-grey hover:bg-grey-dark font-semibold text-sm text-white py-1 px-2 rounded"
       end
     %>
@@ -24,22 +25,42 @@
         <div class="self-start overflow-hidden shadow-md px-6 py-4 mx-2 my-2">
           <div class="flex flex-wrap justify-between my-3">
 
-            <%# button for list_name %>
-            <button name="list_name" class="text-grey-dark"><h2><%= list.name %></h2></button>
+            <div class="flex justify-left">
+              <%# rename list button %>
+              <button name="rename_list" class="mx-2"><%= image 'edit.png', width: 20, length: 20 %></button>
 
-            <%# hidden list rename form %>
+              <div name="list_name">
+                <%# button for list_name %>
+                <% if !list.done %>
+                  <%=
+                    form_for :mark_list, '/lists/mark' do
+                      hidden_field :id, value: list.id
+                      submit list.name, class: 'text-2xl font-bold text-grey-dark'
+                    end
+                  %>
+                <% else %>
+                  <%=
+                    form_for :unmark_list, '/lists/unmark' do
+                      hidden_field :id, value: list.id
+                      submit list.name, class: 'text-2xl font-bold text-grey line-through'
+                    end
+                  %>
+                <% end %>
+              </div>
+            </div>
+
+            <%# hidden list update form %>
             <div name="list_form" style="display:none">
               <%=
-                form_for :rename_list, '/lists/rename' do
+                form_for :update_list, '/lists/update' do
                   text_field :name, autofocus: 'autofocus', class: "border shadow parent w-full text-grey-darker py-2 px-3", placeholder: 'New Name'
                   hidden_field :id, value: list.id
                   submit ''
                 end
               %>
             </div>
-            <%= javascript 'rename_list' %>
+            <%= javascript 'update_list' %>
 
-            <%# delete list x button %>
             <div name="delete_list">
               <%=
                 form_for :delete_list, '/lists/delete' do

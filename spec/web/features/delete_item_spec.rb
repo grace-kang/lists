@@ -11,7 +11,7 @@ describe 'Delete an item' do
     item.clear
 
     @user = user.create(email: 'email', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'token')
-    @list = list.create(user_id: @user.id, name: 'Groceries')
+    @list = list.create(user_id: @user.id, name: 'Groceries', done: false)
     @mushrooms = item.create(list_id: @list.id, text: 'Mushrooms', done: false)
   end
 

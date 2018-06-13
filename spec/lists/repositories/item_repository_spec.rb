@@ -14,7 +14,7 @@ describe ItemRepository do
     @repository.clear
 
     @user = user.create(email: 'test', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'token')
-    @list = list.create(user_id: @user.id, name: 'Groceries')
+    @list = list.create(user_id: @user.id, name: 'Groceries', done: false)
   end
 
   it 'creates an item with attributes' do

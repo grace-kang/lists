@@ -13,8 +13,8 @@ describe 'List lists' do
     subitem.clear
 
     @user = user.create(email: 'email', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'token')
-    @list1 = list.create(user_id: @user.id, name: 'Groceries')
-    @list2 = list.create(user_id: @user.id, name: 'To Do')
+    @list1 = list.create(user_id: @user.id, name: 'Groceries', done: false)
+    @list2 = list.create(user_id: @user.id, name: 'To Do', done: false)
 
     visit '/'
     click_button 'Log In'

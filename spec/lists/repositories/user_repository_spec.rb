@@ -26,8 +26,8 @@ describe UserRepository do
   end
 
   it 'finds lists associated to a user id' do
-    groceries = list.create(user_id: @user.id, name: 'Groceries')
-    todo = list.create(user_id: @user.id, name: 'To do')
+    groceries = list.create(user_id: @user.id, name: 'Groceries', done: false)
+    todo = list.create(user_id: @user.id, name: 'To do', done: false)
     updated_user  = @repository.find_lists(@user.id)
 
     updated_user.lists.must_include groceries
