@@ -4,6 +4,9 @@
 	<% unless flash[:signup_success].nil? %>
 		<div class='text-center text-red text-xs italic'><%= flash[:signup_success] %></div>
 	<% end %>
+  <% unless flash[:confirmed].nil? %>
+    <div class='text-center text-red text-xs italic'><%= flash[:confirmed] %></div>
+	<% end %>
 </div>
  
 
