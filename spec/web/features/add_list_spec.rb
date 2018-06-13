@@ -35,4 +35,3 @@ describe 'Add a list' do
     assert page.has_content?('Some name')
   end
 end
-

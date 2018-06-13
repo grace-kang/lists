@@ -47,4 +47,3 @@ describe Web::Controllers::Items::Create do
     end
   end
 end
-

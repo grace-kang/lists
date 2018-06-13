@@ -20,9 +20,8 @@ describe 'Add a user' do
       fill_in 'Confirm Password', with: 'pass'
       click_button 'Sign Up'
     end
-    
+
     current_path.must_equal '/'
     page.html.must_include 'Successfully signed up!'
   end
 end
-

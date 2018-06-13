@@ -1,4 +1,4 @@
-require "spec_helper"
+require 'spec_helper'
 
 describe Web::Views::ApplicationLayout do
   let(:layout)   { Web::Views::ApplicationLayout.new(template, {}) }

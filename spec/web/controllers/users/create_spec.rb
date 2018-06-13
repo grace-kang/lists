@@ -10,7 +10,7 @@ describe Web::Controllers::Users::Create do
   end
 
   describe 'with valid params' do
-    let(:params) { Hash[user: { email: 'email@email.com', password: 'pass', password_confirmation: 'pass'}] }
+    let(:params) { Hash[user: { email: 'email@email.com', password: 'pass', password_confirmation: 'pass' }] }
     it 'creates a new user' do
       action.call(params)
       @user = user.last
@@ -41,7 +41,7 @@ describe Web::Controllers::Users::Create do
 
     it 'redirects to signup page' do
       response = action.call(params)
-      
+
       response[0].must_equal 302
       response[1]['Location'].must_equal '/users/new'
     end

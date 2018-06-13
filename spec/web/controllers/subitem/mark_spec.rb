@@ -19,9 +19,9 @@ describe Web::Controllers::Subitem::Mark do
     @item = item.create(list_id: @list.id, text: 'Cake', done: false)
     @flour = subitem.create(item_id: @item.id, text: 'Flour', done: false)
   end
-  
+
   describe 'given the subitem id' do
-    let(:params) { Hash[mark_subitem: {id: @flour.id}] }
+    let(:params) { Hash[mark_subitem: { id: @flour.id }] }
 
     it 'marks the item as done and redirects to index' do
       response = action.call(params)

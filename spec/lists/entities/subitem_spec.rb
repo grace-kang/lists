@@ -17,7 +17,7 @@ describe Subitem do
   end
 
   it 'can be initialized with text' do
-    subitem = SubitemRepository.new.create(item_id: @item.id, text: 'Flour', done: false)  
+    subitem = SubitemRepository.new.create(item_id: @item.id, text: 'Flour', done: false)
 
     subitem.text.must_equal 'Flour'
   end

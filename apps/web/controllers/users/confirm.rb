@@ -8,11 +8,10 @@ module Web::Controllers::Users
       if this_user
         user.update(this_user.id, email_confirmed: true)
         flash[:confirmed] = 'Successfully confirmed email! You may log in.'
-        redirect_to '/'
       else
-        flash[:error] = "Error confirming email."
-        redirect_to '/'
+        flash[:error] = 'Error confirming email.'
       end
+      redirect_to '/'
     end
   end
 end

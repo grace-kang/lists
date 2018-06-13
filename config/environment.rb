@@ -4,7 +4,6 @@ require 'hanami/model'
 require_relative '../lib/lists'
 require_relative '../apps/web/application'
 require_relative '../system/import'
-# require "letter_opener"
 
 Hanami.configure do
   mount Web::Application, at: '/'
@@ -40,13 +39,13 @@ Hanami.configure do
     # See: http://hanamirb.org/guides/projects/logging
     logger level: :debug
     mailer do
-      delivery :smtp, 
-      address: ENV.fetch('SMTP_HOST'), 
-      port: ENV.fetch('SMTP_PORT'),
-      domain: "gmail.com", 
-      user_name: ENV.fetch('SMTP_USERNAME'), 
-      password: ENV.fetch('SMTP_PASSWORD'), 
-      authentication: "plain",
+      delivery              :smtp,
+      address:              ENV.fetch('SMTP_HOST'),
+      port:                 ENV.fetch('SMTP_PORT'),
+      domain:               'gmail.com',
+      user_name:            ENV.fetch('SMTP_USERNAME'),
+      password:             ENV.fetch('SMTP_PASSWORD'),
+      authentication:       'plain',
       enable_starttls_auto: true
     end
   end
@@ -55,13 +54,13 @@ Hanami.configure do
     logger level: :info, formatter: :json, filter: []
 
     mailer do
-      delivery :smtp, 
-      address: ENV.fetch('SMTP_HOST'), 
-      port: ENV.fetch('SMTP_PORT'),
-      domain: "gmail.com", 
-      user_name: ENV.fetch('SMTP_USERNAME'), 
-      password: ENV.fetch('SMTP_PASSWORD'),
-      authentication: "plain",
+      delivery              :smtp,
+      address:              ENV.fetch('SMTP_HOST'),
+      port:                 ENV.fetch('SMTP_PORT'),
+      domain:               'gmail.com',
+      user_name:            ENV.fetch('SMTP_USERNAME'),
+      password:             ENV.fetch('SMTP_PASSWORD'),
+      authentication:       'plain',
       enable_starttls_auto: true
     end
   end

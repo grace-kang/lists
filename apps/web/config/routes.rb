@@ -1,12 +1,12 @@
-root to: 'home#login' 
+root to: 'home#login'
 get '/home/index', to: 'home#index'
 
-resources :users, only: [:new, :create] 
+resources :users, only: [:new, :create]
 get '/users/confirm/:token', to: 'users#confirm', as: :confirm_email
 
 resources :sessions, only: [:new, :create, :destroy]
 
-resources :lists, only: [:create, :destroy, :update]  do
+resources :lists, only: [:create, :destroy, :update] do
   collection do
     post 'update'
     post 'mark'
@@ -27,4 +27,3 @@ resources :subitem, only: [:create, :destroy] do
     post 'unmark'
   end
 end
-

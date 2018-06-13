@@ -7,7 +7,7 @@ describe Web::Controllers::Subitem::Unmark do
   include Import['repositories.list']
   include Import['repositories.item']
   include Import['repositories.subitem']
-  
+
   before do
     user.clear
     list.clear
@@ -21,14 +21,14 @@ describe Web::Controllers::Subitem::Unmark do
   end
 
   describe 'given the marked subitems id' do
-    let(:params) { Hash[unmark_subitem: {id: @sugar.id}] }
+    let(:params) { Hash[unmark_subitem: { id: @sugar.id }] }
 
     it 'unmarks the subitem and redirects to index' do
       response = action.call(params)
       updated_subitem = subitem.find(@sugar.id)
 
       updated_subitem.done.must_equal false
-      response[0].must_equal 302 
+      response[0].must_equal 302
       response[1]['Location'].must_equal '/home/index'
     end
   end

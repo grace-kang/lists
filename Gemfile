@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 source 'https://rubygems.org'
+
 ruby '2.5.1'
+gem 'dry-system'
 gem 'hanami',       '~> 1.2'
 gem 'hanami-model', '~> 1.2'
 gem 'pg'
+gem 'pry'
 gem 'rake'
 gem 'tachiban'
-gem 'dry-system'
-gem 'pry'
 
 group :development do
   # Code reloading
   # See: http://hanamirb.org/guides/projects/code-reloading
   gem 'hanami-webconsole'
   gem 'shotgun', platforms: :ruby
-  gem 'letter_opener'
 end
 
 group :test, :development do

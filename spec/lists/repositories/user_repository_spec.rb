@@ -3,7 +3,7 @@ require_relative '../../spec_helper'
 describe UserRepository do
   include Hanami::Tachiban
   include Import['repositories.list']
-  
+
   before do
     @repository = UserRepository.new
     @repository.clear
@@ -28,10 +28,9 @@ describe UserRepository do
   it 'finds lists associated to a user id' do
     groceries = list.create(user_id: @user.id, name: 'Groceries', done: false)
     todo = list.create(user_id: @user.id, name: 'To do', done: false)
-    updated_user  = @repository.find_lists(@user.id)
+    updated_user = @repository.find_lists(@user.id)
 
     updated_user.lists.must_include groceries
     updated_user.lists.must_include todo
   end
 end
-

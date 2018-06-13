@@ -20,7 +20,7 @@ describe Web::Controllers::Subitem::Create do
   end
 
   describe 'with valid params' do
-    let(:params) { Hash[newsubitem: {item_id: @item.id, text: 'Sugar', done: false}] }
+    let(:params) { Hash[newsubitem: { item_id: @item.id, text: 'Sugar', done: false }] }
 
     it 'creates a new subitem' do
       action.call(params)
@@ -34,7 +34,7 @@ describe Web::Controllers::Subitem::Create do
     it 'redirects to index' do
       response = action.call(params)
       response[0].must_equal 302
-      response[1]['Location'].must_equal '/home/index' 
+      response[1]['Location'].must_equal '/home/index'
     end
   end
 

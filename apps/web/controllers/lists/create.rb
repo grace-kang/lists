@@ -16,13 +16,8 @@ module Web::Controllers::Lists
     end
 
     def call(params)
-      if params.valid?
-        list.create(params[:new_list])
-
-        redirect_to '/home/index'
-      else
-        redirect_to '/home/index'
-      end
+      list.create(params[:new_list]) if params.valid?
+      redirect_to '/home/index'
     end
   end
 end

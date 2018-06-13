@@ -17,7 +17,7 @@ describe Web::Controllers::Items::Unmark do
     @this_item = item.create(list_id: @list.id, text: 'Mushrooms', done: true)
   end
 
-  let(:params) { Hash[unmark_item: {id: @this_item.id}] }
+  let(:params) { Hash[unmark_item: { id: @this_item.id }] }
 
   it 'unmarks item and redirects to index' do
     response = action.call(params)

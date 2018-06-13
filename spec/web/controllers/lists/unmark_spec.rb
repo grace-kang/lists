@@ -13,7 +13,7 @@ describe Web::Controllers::Lists::Unmark do
     @this_list = list.create(user_id: @user.id, name: 'Groceries', done: true)
   end
 
-  let(:params) { Hash[unmark_list: {id: @this_list.id}] }
+  let(:params) { Hash[unmark_list: { id: @this_list.id }] }
 
   it 'marks list and redirects to index' do
     response = action.call(params)

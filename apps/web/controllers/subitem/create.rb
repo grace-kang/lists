@@ -7,7 +7,7 @@ module Web::Controllers::Subitem
       required(:newsubitem).schema do
         required(:text).filled(:str?)
         required(:item_id).filled(:int?)
-				required(:done).filled(:bool?)
+        required(:done).filled(:bool?)
       end
     end
 

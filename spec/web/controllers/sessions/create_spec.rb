@@ -16,7 +16,7 @@ describe Web::Controllers::Sessions::Create do
 
     it 'redirects to index' do
       response = action.call(params)
-      response[0].must_equal 302 
+      response[0].must_equal 302
       response[1]['Location'].must_equal '/home/index'
     end
   end

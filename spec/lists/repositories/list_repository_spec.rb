@@ -7,7 +7,7 @@ describe ListRepository do
 
   before do
     @repository = ListRepository.new
-    
+
     @repository.clear
     user.clear
     item.clear

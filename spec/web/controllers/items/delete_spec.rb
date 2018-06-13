@@ -12,13 +12,13 @@ describe Web::Controllers::Items::Delete do
     list.clear
     item.clear
 
-    @user =  user.create(email: 'test', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'token')
-    @list = list.create(user_id: @user.id, name: 'Groceries', done: false, done: false)
+    @user = user.create(email: 'test', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'token')
+    @list = list.create(user_id: @user.id, name: 'Groceries', done: false)
     @this_item = item.create(list_id: @list.id, text: 'Mushrooms', done: false)
   end
 
   describe 'with valid item_id' do
-    let(:params) { Hash[delete_item: {id: @this_item.id}] }
+    let(:params) { Hash[delete_item: { id: @this_item.id }] }
 
     it 'deletes the item and redirects to home' do
       response = action.call(params)

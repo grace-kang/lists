@@ -8,7 +8,7 @@ module Web::Controllers::Home
     expose :this_user
     expose :lists
 
-    def call(params)
+    def call(_params)
       check_for_logged_in_user
       handle_session
       @this_user = session[:current_user]

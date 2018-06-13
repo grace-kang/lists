@@ -24,7 +24,7 @@ describe 'update a list' do
     current_path.must_equal '/home/index'
     page.html.must_include 'Groceries'
     click_button 'Groceries'
-    
+
     Capybara.ignore_hidden_elements = false
     within 'form#update_list-form' do
       fill_in 'New Name', with: 'Chores'

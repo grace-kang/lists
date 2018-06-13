@@ -5,7 +5,7 @@ module Dry
 
       def register_folder!(folder, resolver: ->(k) { k.new })
         all_files_in_folder(folder).each do |file|
-          register_name = file.sub("#{PROJECT_NAME}/", '').gsub('/', '.').gsub(/_repository\z/, '')
+          register_name = file.sub("#{PROJECT_NAME}/", '').tr('/', '.').gsub(/_repository\z/, '')
           register(register_name, memoize: true) { load! file, resolver: resolver }
         end
       end
@@ -13,7 +13,7 @@ module Dry
       def all_files_in_folder(folder)
         Dir
           .entries("#{::Hanami.root}/lib/#{folder}")
-          .select {|f| !File.directory? f}
+          .select { |f| !File.directory? f }
           .map! { |file_name| "#{folder}/#{file_name.sub!('.rb', '')}" }
       end
 

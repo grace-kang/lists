@@ -14,7 +14,7 @@ describe Web::Views::Home::Index do
     subitem.clear
   end
 
-  let(:current_user) { user.create(email: 'email', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'sometoken')}
+  let(:current_user) { user.create(email: 'email', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'sometoken') }
   let(:exposures) { Hash[lists: [], this_user: current_user, params: {}] }
   let(:template)  { Hanami::View::Template.new('apps/web/templates/home/index.html.erb') }
   let(:view)      { Web::Views::Home::Index.new(template, exposures) }
@@ -54,7 +54,6 @@ describe Web::Views::Home::Index do
     end
 
     describe 'when there are unmarked items' do
-
       before do
         item.create(list_id: list1.id, text: 'Mushrooms', done: false)
         exposures[:lists].map! { |l| list.find_items(l.id) }
@@ -67,7 +66,6 @@ describe Web::Views::Home::Index do
       end
 
       describe 'when there are subitems' do
-
         before do
           cake = item.create(list_id: list1.id, text: 'Cake Ingredients', done: false)
           subitem.create(item_id: cake.id, text: 'Sugar', done: false)
@@ -84,7 +82,7 @@ describe Web::Views::Home::Index do
           rendered.must_include 'Flour'
         end
       end
-    end 
+    end
 
     describe 'when there are marked items' do
       before do
@@ -106,4 +104,3 @@ describe Web::Views::Home::Index do
     end
   end
 end
-

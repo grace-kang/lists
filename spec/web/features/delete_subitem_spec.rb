@@ -36,5 +36,3 @@ describe 'Delete a subitem' do
     page.html.wont_include 'Sugar'
   end
 end
-
-

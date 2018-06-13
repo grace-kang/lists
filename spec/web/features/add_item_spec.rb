@@ -20,13 +20,11 @@ describe 'Add an item' do
     click_button 'Log In'
 
     current_path.must_equal('/sessions/new')
-
     within 'form#session-form' do
       fill_in 'Email', with: @user.email
       fill_in 'Password', with: 'pass'
       click_button 'Log In'
     end
-
     within 'form#newitem-form' do
       fill_in 'New Item', with: 'Some text'
       click_button 'Add'
@@ -36,4 +34,3 @@ describe 'Add an item' do
     assert page.has_content?('Some text')
   end
 end
-

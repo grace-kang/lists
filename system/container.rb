@@ -8,5 +8,3 @@ class Application < Dry::System::Container
 
   configure
 end
-
-

@@ -22,7 +22,7 @@ describe Web::Controllers::Home::Index do
 
   describe 'not logged in' do
     let(:params) { Hash[] }
-     
+
     it 'redirects to root' do
       response = action.call(params)
       response[0].must_equal 302
@@ -30,4 +30,3 @@ describe Web::Controllers::Home::Index do
     end
   end
 end
-

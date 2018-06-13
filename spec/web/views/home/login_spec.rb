@@ -7,12 +7,12 @@ describe Web::Views::Home::Login do
   let(:rendered)  { view.render }
 
   it 'displays the login  and signup button' do
-    rendered.must_include '<div class="login button">' 
+    rendered.must_include '<div class="login button">'
     rendered.must_include '<div class="signup button">'
   end
 
   describe 'with flash message' do
-    let(:exposures) { Hash[flash: {signup_success: 'Successfully signed up! Please log in.'}, params:{}] }
+    let(:exposures) { Hash[flash: { signup_success: 'Successfully signed up! Please log in.' }, params: {}] }
 
     it 'displays the flash message' do
       rendered.must_include 'Successfully signed up! Please log in.'
