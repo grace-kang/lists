@@ -294,9 +294,9 @@ module Web
     # PRODUCTION
     #
     configure :production do
-      # scheme 'https'
-      # host   'lists-web-app.herokuapp.com'
-      # port   443
+      scheme 'https'
+      host   'lists-web-app.herokuapp.com'
+      port   443
 
       assets do
         # Don't compile static assets in production mode (eg. Sass, ES6)
