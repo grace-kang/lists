@@ -4,6 +4,7 @@
 <p>Thank you for signing up!</br>
 To confirm your registration, click the URL below.<br><br>
 
-<%= link_to 'Confirm Email', Web.routes.confirm_email_url(user.token, host: "https://lists-web.herokuapp.com") %>
+<%= link_to 'Confirm Email', "https://lists-web.herokuapp.com#{ Web.routes.confirm_email_path(user.token) }" %>
+
 </p>
 </body>
