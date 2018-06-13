@@ -45,7 +45,7 @@ Hanami.configure do
       port: ENV.fetch('SMTP_PORT'),
       domain: "gmail.com", 
       user_name: ENV.fetch('SMTP_USERNAME'), 
-      password: "ENV.fetch('SMTP_PASSWORD')", 
+      password: ENV.fetch('SMTP_PASSWORD'), 
       authentication: "plain",
       enable_starttls_auto: true
     end
@@ -60,7 +60,7 @@ Hanami.configure do
       port: ENV.fetch('SMTP_PORT'),
       domain: "gmail.com", 
       user_name: ENV.fetch('SMTP_USERNAME'), 
-      password: "ENV.fetch('SMTP_PASSWORD')",
+      password: ENV.fetch('SMTP_PASSWORD'),
       authentication: "plain",
       enable_starttls_auto: true
     end
