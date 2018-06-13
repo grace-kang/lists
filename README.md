@@ -13,7 +13,7 @@ Run locally:
 
 Go to http://localhost:2300 to use the application.
 
-Or go to https://lists-web-app.herokuapp.com/ to use the application.
+Or go to https://lists-web.herokuapp.com/ to use the application.
 
 ## Screenshot
 
