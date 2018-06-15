@@ -27,3 +27,5 @@ resources :subitem, only: [:create, :destroy] do
     post 'unmark'
   end
 end
+
+post '/lists/update_order', to: 'lists#update_order'
