@@ -4,6 +4,14 @@ class ListRepository < Hanami::Repository
   end
 
   def find_items(id)
-    aggregate(:items).where(id: id).as(List).one
+    aggregate(:items)
+			.where(id: id)
+			.as(List)
+			.one
+			.order(:position)
   end
+
+	def get_last_position
+		lists.max(:position)
+	end
 end
