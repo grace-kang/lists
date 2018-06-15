@@ -1,12 +1,22 @@
-var lists = document.getElementsByName('list');
+var container = document.getElementById('list_container');
 
-for (var i = 0; i < lists.length; i++) {
-	var sort = Sortable.create(lists[i], {
-		animation: 150,
-		onUpdate: function (evt/**Event*/){
-			console.log("onUpdate");
-			var item = evt.item;
-			console.log(evt.item.toArray());
+var sort = Sortable.create(container, {
+	animation: 150,
+	draggable: ".list",
+	onUpdate: function (evt/**Event*/){
+		order = sort.toArray();
+		order_hash = {};
+		for (var i = 0; i < order.length; i++) {
+			order_hash[order[i]] = i;
 		}
-	});
-}	
+		updateOrder(order_hash);
+	}
+});
+	
+function updateOrder(order) {
+	console.log("updateOrder()")
+	var xhttp = new XMLHttpRequest();
+	xhttp.open("POST", '/users/update_order', true);
+	xhttp.send(order);
+	console.log("order sent");
+}

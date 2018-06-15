@@ -3,6 +3,7 @@ get '/home/index', to: 'home#index'
 
 resources :users, only: [:new, :create]
 get '/users/confirm/:token', to: 'users#confirm', as: :confirm_email
+post '/users/update_order', to: 'users#update_order'
 
 resources :sessions, only: [:new, :create, :destroy]
 
@@ -28,4 +29,3 @@ resources :subitem, only: [:create, :destroy] do
   end
 end
 
-post '/lists/update_order', to: 'lists#update_order'
