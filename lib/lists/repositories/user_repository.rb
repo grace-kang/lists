@@ -10,7 +10,6 @@ class UserRepository < Hanami::Repository
   def find_lists(id)
     aggregate(:lists)
 			.where(id: id)
-			.order(:position)
 			.as(User)
 			.one
   end
