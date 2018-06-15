@@ -17,7 +17,7 @@ module Web::Controllers::Lists
 
     def call(params)
 			if list.count > 0
-				pos = list.get_last_position.position + 1
+				pos = list.get_last_position + 1
 			else
 				pos = 0
 			end
