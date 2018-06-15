@@ -22,8 +22,6 @@ module Web::Controllers::Lists
 				pos = 0
 			end
 
-			puts last_pos
-			puts last_pos.position
 			params[:new_list][:position] = pos
 
       list.create(params[:new_list]) if params.valid?
