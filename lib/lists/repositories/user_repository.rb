@@ -10,8 +10,7 @@ class UserRepository < Hanami::Repository
   def find_lists(id)
     aggregate(:lists)
 			.where(id: id)
-			.as(User)
-			.one
+			.order(:position)
   end
 
   def find_by_token(token)
