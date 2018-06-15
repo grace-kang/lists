@@ -7,12 +7,15 @@ class ListRepository < Hanami::Repository
 		lists.count
 	end
 
+	def order_by_position
+		lists.order { position.asc }
+	end
+
   def find_items(id)
     aggregate(:items)
 			.where(id: id)
 			.as(List)
 			.one
-			.order(:position)
   end
 
 	def get_last_position
