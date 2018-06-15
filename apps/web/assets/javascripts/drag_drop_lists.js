@@ -1,9 +1,20 @@
-import { Draggable } from '@shopify/draggable';
+// eslint-disable-next-line import/no-unresolved
+import {Swappable, Plugins} from '@shopify/draggable';
 
-const draggable = new Draggable(document.getElementsByName('list'), {
-  draggable: 'li'
-});
+export default function Flexbox() {
+  const containers = document.getElementsByName('list');
 
-draggable.on('drag:start', () => console.log('drag:start'));
-draggable.on('drag:move', () => console.log('drag:move'));
-draggable.on('drag:stop', () => console.log('drag:stop'));
+  if (containers.length === 0) {
+    return false;
+  }
+
+  const swappable = new Swappable(containers, {
+    draggable: '.Block--isDraggable',
+    mirror: {
+      constrainDimensions: true,
+    },
+    plugins: [Plugins.ResizeMirror],
+  });
+
+  return swappable;
+}
