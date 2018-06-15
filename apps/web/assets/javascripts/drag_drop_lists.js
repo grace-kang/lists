@@ -7,9 +7,5 @@ for (var i = 0; i < lists.length; i++) {
 			console.log("onUpdate");
 			var item = evt.item;
 		}
-		onEnd: function (evt/**Event*/) {
-			console.log("onEnd");
-			console.log(sort.toArray());
-		}
 	});
 }	
