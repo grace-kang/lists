@@ -2,7 +2,7 @@ import {Swappable, Plugins} from '@shopify/draggable';
 
 export default function Flexbox() {
   const containers = document.getElementsByName('list');
-  puts containers
+  console.log(containers);
 
   if (containers.length === 0) {
     return false;
