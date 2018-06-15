@@ -1,6 +1,3 @@
-import Swappable from '@shopify/draggable';
-import Plugins from '@shopify/draggable';
-
 export default function Flexbox() {
   const containers = document.getElementsByName('list');
   console.log(containers);
