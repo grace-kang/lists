@@ -1,8 +1,8 @@
-// eslint-disable-next-line import/no-unresolved
 import {Swappable, Plugins} from '@shopify/draggable';
 
 export default function Flexbox() {
   const containers = document.getElementsByName('list');
+  puts containers
 
   if (containers.length === 0) {
     return false;
