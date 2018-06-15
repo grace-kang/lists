@@ -124,10 +124,6 @@ GEM
       url_mount (~> 0.2.1)
     ice_nine (0.11.2)
     inflecto (0.0.2)
-    launchy (2.4.3)
-      addressable (~> 2.3)
-    letter_opener (1.6.0)
-      launchy (~> 2.2)
     mail (2.7.0)
       mini_mime (>= 0.1.1)
     method_source (0.9.0)
@@ -191,7 +187,6 @@ DEPENDENCIES
   hanami (~> 1.2)
   hanami-model (~> 1.2)
   hanami-webconsole
-  letter_opener
   minitest
   pg
   pry
