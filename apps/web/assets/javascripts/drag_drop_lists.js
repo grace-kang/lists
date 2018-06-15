@@ -6,6 +6,7 @@ for (var i = 0; i < lists.length; i++) {
 		onUpdate: function (evt/**Event*/){
 			console.log("onUpdate");
 			var item = evt.item;
+			console.log(evt.item.toArray());
 		}
 	});
 }	
