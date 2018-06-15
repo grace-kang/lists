@@ -7,9 +7,11 @@ class UserRepository < Hanami::Repository
     users.where(email: email).as(User).one
   end
 
-  def find_lists(user_id)
-    assoc(:lists, user_id)
-			.order(:position)
+  def find_lists(id)
+    aggregate(:lists)
+			.where(id: id)
+			.as(User)
+			.one
   end
 
   def find_by_token(token)
