@@ -13,8 +13,8 @@ module Web::Controllers::Home
       handle_session
       @this_user = session[:current_user]
 
-      @this_user = user.find_lists(@this_user.id)
-      @lists = @this_user.lists
+       #@this_user = user.find_lists(@this_user.id)
+      @lists = list.order_by_position(@this_user.id)
       @lists.map! { |l| list.find_items(l.id) }
       @lists.each { |l| l.items.map! { |i| item.find_subitems(i.id) } }
     end

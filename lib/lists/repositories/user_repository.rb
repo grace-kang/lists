@@ -12,7 +12,6 @@ class UserRepository < Hanami::Repository
 			.where(id: id)
 			.as(User)
 			.one
-			.order(:position)
   end
 
   def find_by_token(token)
