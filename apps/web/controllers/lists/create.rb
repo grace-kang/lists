@@ -17,6 +17,8 @@ module Web::Controllers::Lists
 
     def call(params)
 			last_pos = list.get_last_position
+			puts last_pos
+			puts last_pos.position
 			params[:new_list][:position] = last_pos + 1
 
       list.create(params[:new_list]) if params.valid?
