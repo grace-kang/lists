@@ -1,4 +1,6 @@
 var lists = document.getElementsByName('list');
 console.log(lists);
 
-Sortable.create(lists);
+for (var i = 0; i < lists.length; i++) {
+	Sortable.create(lists[i]);
+}
