@@ -3,6 +3,10 @@ class ListRepository < Hanami::Repository
     has_many :items
   end
 
+	def count
+		lists.count
+	end
+
   def find_items(id)
     aggregate(:items)
 			.where(id: id)

@@ -16,10 +16,15 @@ module Web::Controllers::Lists
     end
 
     def call(params)
-			last_pos = list.get_last_position
+			if lists.count > 0
+				pos = list.get_last_position.position + 1
+			else
+				pos = 0
+			end
+
 			puts last_pos
 			puts last_pos.position
-			params[:new_list][:position] = last_pos + 1
+			params[:new_list][:position] = pos
 
       list.create(params[:new_list]) if params.valid?
       redirect_to '/home/index'
