@@ -9,7 +9,7 @@ for (var i = 0; i < lists.length; i++) {
 		}
 		onEnd: function (evt/**Event*/) {
 			console.log("onEnd");
-			console.log(sort.toArray())
+			console.log(sort.toArray());
 		}
 	});
 }	
