@@ -1,11 +1,13 @@
 <%= stylesheet 'application' %>
 <%= stylesheet 'output' %>
+<%= javascript 'Sortable' %>
 
 <!DOCTYPE html>
 <html>
   <head>
     <title>Lists</title>
     <%= favicon %>
+		<meta name="csrf" content= <%= csrf_token %>>
   </head>
   <body>
     <div class="p-6 mb-4 bg-grey-light">

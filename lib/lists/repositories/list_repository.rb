@@ -7,8 +7,9 @@ class ListRepository < Hanami::Repository
 		lists.count
 	end
 
-	def order_by_position
+	def find_with_user_id(id)
 		lists
+			.where(user_id: id)
 			.order { position.asc }
 	end
 

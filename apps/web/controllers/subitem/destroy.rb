@@ -1,5 +1,5 @@
 module Web::Controllers::Subitem
-  class Delete
+  class Destroy
     include Web::Action
     include Import['repositories.subitem']
 

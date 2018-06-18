@@ -7,13 +7,6 @@ class UserRepository < Hanami::Repository
     users.where(email: email).as(User).one
   end
 
-  def find_lists(id)
-    aggregate(:lists)
-			.where(id: id)
-			.as(User)
-			.one
-  end
-
   def find_by_token(token)
     users.where(token: token).as(User).one
   end

@@ -1,8 +1,3 @@
-<head>
-	<%= javascript 'Sortable' %>
-</head>
-
-<body>
   <%# logout button %>
   <%=
     form_for :session, '/sessions/logout', method: :delete do
@@ -67,7 +62,7 @@
 
             <div name="delete_list">
               <%=
-                form_for :delete_list, '/lists/delete' do
+                form_for :delete_list, '/lists/destroy',method: :delete do
                   hidden_field :id, value: list.id
 
                   div class: 'controls' do
@@ -107,7 +102,7 @@
 
                     <%# delete item button %>
                     <%=
-                      form_for :delete_item, '/items/delete' do
+                      form_for :delete_item, '/items/destroy', method: :delete do
                         hidden_field :id, value: item.id
                         submit 'x', class: 'bg-white text-sm font-semibold text-grey-dark mx-3 rounded'
                       end
@@ -129,7 +124,7 @@
 
                           <%# delete subitem button %>
                           <%= 
-                            form_for :delete_subitem, '/subitem/delete' do
+                            form_for :delete_subitem, '/subitem/destroy', method: :delete do
                               hidden_field :id, value: subitem.id
                               submit 'x', class: 'bg-white text-sm font-semibold text-grey-dark mx-3 rounded'
                             end
@@ -149,7 +144,7 @@
 
                           <%# delete subitem button %>
                           <%= 
-                            form_for :delete_subitem, '/subitem/delete' do
+                            form_for :delete_subitem, '/subitem/destroy', method: :delete do
                               hidden_field :id, value: subitem.id
                               submit 'x', class: 'bg-white text-sm font-semibold text-grey-dark mx-3 rounded'
                             end
@@ -194,7 +189,7 @@
 
                     <%# delete item button %>
                     <%=
-                      form_for :delete_item, '/items/delete' do
+                      form_for :delete_item, '/items/destroy', method: :delete do
                         hidden_field :id, value: item.id
                         submit 'x', class: 'bg-white text-sm font-semibold text-grey-dark mx-3 rounded'
                       end
@@ -229,4 +224,3 @@
     <p class="placeholder text-sm text-grey-dark m-4">You do not have any lists yet.</p>
   <% end %>
 	<%= javascript 'drag_drop_lists' %>
-</body>

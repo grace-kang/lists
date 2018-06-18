@@ -1,11 +1,11 @@
 require_relative '../../../spec_helper'
 
-describe Web::Controllers::Items::Delete do
+describe Web::Controllers::Items::Destroy do
   include Hanami::Tachiban
   include Import['repositories.user']
   include Import['repositories.list']
   include Import['repositories.item']
-  let(:action) { Web::Controllers::Items::Delete.new }
+  let(:action) { Web::Controllers::Items::Destroy.new }
 
   before do
     user.clear

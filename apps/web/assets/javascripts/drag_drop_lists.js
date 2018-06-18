@@ -1,4 +1,5 @@
 var container = document.getElementById('list_container');
+var csrf = document.getElementsByName('csrf');
 
 var sort = Sortable.create(container, {
 	animation: 150,
@@ -14,9 +15,12 @@ var sort = Sortable.create(container, {
 });
 	
 function updateOrder(order) {
-	console.log("updateOrder()")
+	order = JSON.stringify(order);
+	formData = new FormData();
+	formData.append("_csrf_token", csrf[0].content);
+	formData.append("order", order);
+
 	var xhttp = new XMLHttpRequest();
 	xhttp.open("POST", '/users/update_order', true);
-	xhttp.send(order);
-	console.log("order sent");
+	xhttp.send(formData);
 }

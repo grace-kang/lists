@@ -1,5 +1,5 @@
 module Web::Controllers::Lists
-  class Delete
+  class Destroy
     include Web::Action
     include Import['repositories.list']
 
