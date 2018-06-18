@@ -1,7 +1,7 @@
 require_relative '../../../spec_helper'
 
-describe Web::Controllers::Lists::Delete do
-  let(:action) { Web::Controllers::Lists::Delete.new }
+describe Web::Controllers::Lists::Destroy do
+  let(:action) { Web::Controllers::Lists::Destroy.new }
   include Hanami::Tachiban
   include Import['repositories.user']
   include Import['repositories.list']
@@ -11,7 +11,7 @@ describe Web::Controllers::Lists::Delete do
     list.clear
 
     @user = user.create(email: 'test', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'token')
-    @this_list = list.create(user_id: @user.id, name: 'Groceries', done: false)
+    @this_list = list.create(user_id: @user.id, name: 'Groceries', done: false, position: 0)
   end
 
   let(:params) { Hash[delete_list: { id: @this_list.id }] }

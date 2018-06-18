@@ -22,9 +22,11 @@ module Web::Controllers::Lists
 				pos = 0
 			end
 
-			params[:new_list][:position] = pos
+			if params.valid?
+				params[:new_list][:position] = pos
+      	list.create(params[:new_list])
+			end
 
-      list.create(params[:new_list]) if params.valid?
       redirect_to '/home/index'
     end
   end

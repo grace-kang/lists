@@ -11,7 +11,7 @@ describe 'Unmark a marked item' do
     item.clear
 
     @user = user.create(email: 'email', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'sometoken')
-    @list = list.create(user_id: @user.id, name: 'Groceries', done: false)
+    @list = list.create(user_id: @user.id, name: 'Groceries', done: false, position: 0)
     item.create(list_id: @list.id, text: 'Pepper', done: true)
 
     visit '/'

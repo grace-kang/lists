@@ -13,7 +13,7 @@ describe ListRepository do
     item.clear
 
     @this_user = user.create(email: 'test', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'token')
-    @new_list = @repository.create(name: 'Groceries', user_id: @this_user.id, done: false)
+    @new_list = @repository.create(name: 'Groceries', user_id: @this_user.id, done: false, position: 0)
   end
 
   it 'can create a new list' do

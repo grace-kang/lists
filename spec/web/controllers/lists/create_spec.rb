@@ -13,7 +13,7 @@ describe Web::Controllers::Lists::Create do
   end
 
   describe 'with valid params' do
-    let(:params) { Hash[new_list: { name: 'Groceries', user_id: @new_user.id, done: false }] }
+    let(:params) { Hash[new_list: { name: 'Groceries', user_id: @new_user.id, done: false, position: 0 }] }
     it 'creates a new list' do
       action.call(params)
       new_list = list.last

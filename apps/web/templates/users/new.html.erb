@@ -3,15 +3,15 @@
 <div class='flex justify-center'>
 	<%=
 		form_for :user, '/users' , class: 'flex-col' do
-			div do
+			div class: 'email-input' do
 				text_field :email, class: 'border shadow parent w-full text-grey-darker py-2 px-3 my-2', placeholder: 'Email'
 			end
 
-			div do
+			div class: 'password-input' do
 				text_field :password, type: 'password', class: 'border shadow parent w-full text-grey-darker py-2 px-3 my-2', placeholder: 'Password'
 			end
 	 
-			div do
+			div class: 'password-confirmation-input' do
 				text_field :password_confirmation, type: 'password', class: 'border shadow parent w-full text-grey-darker py-2 px-3 my-2', placeholder: 'Confirm Password'
 			end
 

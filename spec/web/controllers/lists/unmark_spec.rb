@@ -10,7 +10,7 @@ describe Web::Controllers::Lists::Unmark do
     list.clear
 
     @user = user.create(email: 'test', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'token')
-    @this_list = list.create(user_id: @user.id, name: 'Groceries', done: true)
+    @this_list = list.create(user_id: @user.id, name: 'Groceries', done: true, position: 0)
   end
 
   let(:params) { Hash[unmark_list: { id: @this_list.id }] }

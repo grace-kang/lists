@@ -35,8 +35,8 @@ describe Web::Views::Home::Index do
   end
 
   describe 'when there are lists' do
-    let(:list1)     { list.create(user_id: current_user.id, name: 'Groceries', done: false) }
-    let(:list2)     { list.create(user_id: current_user.id, name: 'Homework', done: false) }
+    let(:list1)     { list.create(user_id: current_user.id, name: 'Groceries', done: false, position: 0) }
+    let(:list2)     { list.create(user_id: current_user.id, name: 'Homework', done: false, position: 0) }
     let(:exposures) { Hash[lists: [list1, list2], this_user: current_user, params: {}] }
 
     before do

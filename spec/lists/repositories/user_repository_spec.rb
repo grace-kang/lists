@@ -19,18 +19,16 @@ describe UserRepository do
   end
 
   it 'finds a user by email' do
-    found_user = @repository.find_by_email(@user.email)
+    found_user = @repository.find_by_email('email')
 
     found_user.id.wont_be_nil
     found_user.id.must_equal @user.id
   end
 
-  it 'finds lists associated to a user id' do
-    groceries = list.create(user_id: @user.id, name: 'Groceries', done: false)
-    todo = list.create(user_id: @user.id, name: 'To do', done: false)
-    updated_user = @repository.find_lists(@user.id)
-
-    updated_user.lists.must_include groceries
-    updated_user.lists.must_include todo
+  it 'finds a user by token' do
+		found_user = @repository.find_by_token('token')
+		
+		found_user.id.wont_be_nil
+		found_user.id.must_equal @user.id
   end
 end

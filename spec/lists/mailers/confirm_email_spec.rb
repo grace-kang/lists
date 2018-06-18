@@ -14,7 +14,7 @@ describe Mailers::ConfirmEmail do
     Mailers::ConfirmEmail.deliver(user: @user)
     mail = Hanami::Mailer.deliveries.last
 
-    expect(mail.to).must_equal @user.email
+    expect(mail.to[0]).must_equal @user.email
     expect(mail.body.encoded).must_include "Hi #{@user.email},"
   end
 end

@@ -12,7 +12,7 @@ describe Web::Controllers::Items::Create do
     item.clear
 
     @this_user = user.create(email: 'test', hashed_pass: 'test', email_confirmed: true, token: 'token')
-    @new_list = list.create(name: 'Groceries', user_id: @this_user.id, done: false)
+    @new_list = list.create(name: 'Groceries', user_id: @this_user.id, done: false, position: 0)
   end
 
   describe 'with valid params' do
