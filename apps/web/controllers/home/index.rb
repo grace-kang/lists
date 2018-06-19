@@ -11,18 +11,10 @@ module Web::Controllers::Home
 		expose :items
 		expose :subitems
 
-# TODO
-# @lists: array of list objects
-# @items: nested array of items, each nested array correspoinds to a list via its index
-# @subitems: nested array of subitems, each nested corresponds to an item via its index
-
-
     def call(_params)
       check_for_logged_in_user
       handle_session
       @this_user = session[:current_user]
-#			@this_user = user.find_lists(@this_user.id)
-#			@lists = @this_user.lists
       @lists = list.find_with_user_id(@this_user.id)
 
 			@items = Array.new
@@ -32,7 +24,6 @@ module Web::Controllers::Home
 				item_arr.each do |i|
 					@items[l.id].push(i)
 				end
-#				@items[l.id].sort_by { |obj| obj.position }
 			end
 
 			@subitems = Array.new
@@ -43,13 +34,8 @@ module Web::Controllers::Home
 					subitem_arr.each do |s|
 						@subitems[i.id].push(s)
 					end
-#					@subitems[i.id].sort_by { |obj| obj.position }
 				end
 			end
-
-#      @lists.map! { |l| list.find_items(l.id) }
-#			@lists.map! { |l| l.items.sort_by { |obj| obj.position } }
-#      @lists.each { |l| l.items.map! { |i| item.find_subitems(i.id) } }
     end
   end
 end

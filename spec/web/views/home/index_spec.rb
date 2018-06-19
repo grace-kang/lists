@@ -1,106 +1,183 @@
 require_relative '../../../spec_helper'
 
 describe Web::Views::Home::Index do
-  include Hanami::Tachiban
-  include Import['repositories.user']
-  include Import['repositories.list']
-  include Import['repositories.item']
-  include Import['repositories.subitem']
+	include Hanami::Tachiban
+	include Import['repositories.user']
+	include Import['repositories.list']
+	include Import['repositories.item']
+	include Import['repositories.subitem']
 
-  before do
-    user.clear
-    list.clear
-    item.clear
-    subitem.clear
-  end
+	before do
+		user.clear
+		list.clear
+		item.clear
+		subitem.clear
+	end
 
-  let(:current_user) { user.create(email: 'email', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'sometoken') }
-  let(:exposures) { Hash[lists: [], this_user: current_user, params: {}] }
-  let(:template)  { Hanami::View::Template.new('apps/web/templates/home/index.html.erb') }
-  let(:view)      { Web::Views::Home::Index.new(template, exposures) }
-  let(:rendered)  { view.render }
+	let(:current_user) { user.create(email: 'email', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'sometoken') }
+	let(:exposures) { Hash[lists: [], this_user: current_user, params: {}, items: [], subitems: []] }
+	let(:template)  { Hanami::View::Template.new('apps/web/templates/home/index.html.erb') }
+	let(:view)      { Web::Views::Home::Index.new(template, exposures) }
+	let(:rendered)  { view.render }
 
-  it 'exposes #lists' do
-    view.lists.must_equal exposures.fetch(:lists)
-  end
+	it 'exposes #lists' do
+		view.lists.must_equal exposures.fetch(:lists)
+	end
 
-  it 'exposes #this_user' do
-    view.this_user.must_equal exposures.fetch(:this_user)
-  end
+	it 'exposes #this_user' do
+		view.this_user.must_equal exposures.fetch(:this_user)
+	end
 
-  describe 'when there are no lists' do
-    it 'shows a placeholder message' do
-      rendered.must_include('You do not have any lists yet.')
-    end
-  end
+	describe 'when there are no lists' do
+		it 'shows a placeholder message' do
+			rendered.must_include('You do not have any lists yet.')
+		end
+	end
 
-  describe 'when there are lists' do
-    let(:list1)     { list.create(user_id: current_user.id, name: 'Groceries', done: false, position: 0) }
-    let(:list2)     { list.create(user_id: current_user.id, name: 'Homework', done: false, position: 0) }
-    let(:exposures) { Hash[lists: [list1, list2], this_user: current_user, params: {}] }
+	describe 'when there are lists' do
+		let(:list1)     { list.create(user_id: current_user.id, name: 'Groceries', done: false, position: 0) }
+		let(:list2)     { list.create(user_id: current_user.id, name: 'Homework', done: false, position: 0) }
+		let(:exposures) { Hash[lists: [list1, list2], this_user: current_user, params: {}] }
 
-    before do
-      exposures[:lists].map! { |l| list.find_items(l.id) }
-      exposures[:lists].each { |l| l.items.map! { |i| item.find_subitems(i.id) } }
-    end
+		before do
+			@lists = list.find_with_user_id(current_user.id)
 
-    it 'lists them all' do
-      rendered.must_include('Groceries')
-      rendered.must_include('Homework')
-    end
+			@items = Array.new
+			@lists.each do |l|
+				@items[l.id] = Array.new
+				item_arr = item.find_by_list(l.id)
+				item_arr.each do |i|
+					@items[l.id].push(i)
+				end
+			end
 
-    it 'hides the placeholder message' do
-      rendered.wont_include('You do not have any lists yet.')
-    end
+			@subitems = Array.new
+			@lists.each do |l|
+				@items[l.id].each do |i|
+					@subitems[i.id] = Array.new
+					subitem_arr = subitem.find_with_item(i.id)
+					subitem_arr.each do |s|
+						@subitems[i.id].push(s)
+					end
+				end
+			end
+		end
 
-    describe 'when there are unmarked items' do
-      before do
-        item.create(list_id: list1.id, text: 'Mushrooms', done: false, position: 0)
-        exposures[:lists].map! { |l| list.find_items(l.id) }
-        exposures[:lists].each { |l| l.items.map! { |i| item.find_subitems(i.id) } }
-      end
+		it 'lists them all' do
+			rendered.must_include('Groceries')
+			rendered.must_include('Homework')
+		end
 
-      it 'lists item' do
-        rendered.scan(/id="items"/).count.must_equal 1
-        rendered.must_include 'Mushrooms'
-      end
+		it 'hides the placeholder message' do
+			rendered.wont_include('You do not have any lists yet.')
+		end
 
-      describe 'when there are subitems' do
-        before do
-          cake = item.create(list_id: list1.id, text: 'Cake Ingredients', done: false, position: 0)
-          subitem.create(item_id: cake.id, text: 'Sugar', done: false, position: 0)
-          subitem.create(item_id: cake.id, text: 'Flour', done: true, position: 0)
-          exposures[:lists].map! { |l| list.find_items(l.id) }
-          exposures[:lists].each { |l| l.items.map! { |i| item.find_subitems(i.id) } }
-        end
+		describe 'when there are unmarked items' do
+			before do
+				item.create(list_id: list1.id, text: 'Mushrooms', done: false, position: 0)
+				@lists = list.find_with_user_id(current_user.id)
 
-        it 'displays the unmarked subitems' do
-          rendered.must_include 'Sugar'
-        end
+				@items = Array.new
+				@lists.each do |l|
+					@items[l.id] = Array.new
+					item_arr = item.find_by_list(l.id)
+					item_arr.each do |i|
+						@items[l.id].push(i)
+					end
+				end
 
-        it 'displays the marked subitems' do
-          rendered.must_include 'Flour'
-        end
-      end
-    end
+				@subitems = Array.new
+				@lists.each do |l|
+					@items[l.id].each do |i|
+						@subitems[i.id] = Array.new
+						subitem_arr = subitem.find_with_item(i.id)
+						subitem_arr.each do |s|
+							@subitems[i.id].push(s)
+						end
+					end
+				end
+			end
 
-    describe 'when there are marked items' do
-      before do
-        pie = item.create(list_id: list1.id, text: 'Pie', done: true, position: 0)
-        subitem.create(item_id: pie.id, text: 'Crust', done: false, position: 0)
-        subitem.create(item_id: pie.id, text: 'Filling', done: true, position: 0)
-        exposures[:lists].map! { |l| list.find_items(l.id) }
-        exposures[:lists].each { |l| l.items.map! { |i| item.find_subitems(i.id) } }
-      end
+			it 'lists item' do
+				rendered.scan(/id="items"/).count.must_equal 1
+				rendered.must_include 'Mushrooms'
+			end
 
-      it 'displays the marked item' do
-        rendered.must_include 'Pie'
-      end
+			describe 'when there are subitems' do
+				before do
+					cake = item.create(list_id: list1.id, text: 'Cake Ingredients', done: false, position: 0)
+					subitem.create(item_id: cake.id, text: 'Sugar', done: false, position: 0)
+					subitem.create(item_id: cake.id, text: 'Flour', done: true, position: 0)
+					@lists = list.find_with_user_id(current_user.id)
 
-      it 'does not display marked or unmarked subitems' do
-        rendered.wont_include 'Crust'
-        rendered.wont_include 'Filling'
-      end
-    end
-  end
+					@items = Array.new
+					@lists.each do |l|
+						@items[l.id] = Array.new
+						item_arr = item.find_by_list(l.id)
+						item_arr.each do |i|
+							@items[l.id].push(i)
+						end
+					end
+
+					@subitems = Array.new
+					@lists.each do |l|
+						@items[l.id].each do |i|
+							@subitems[i.id] = Array.new
+							subitem_arr = subitem.find_with_item(i.id)
+							subitem_arr.each do |s|
+								@subitems[i.id].push(s)
+							end
+						end
+					end
+				end
+
+				it 'displays the unmarked subitems' do
+					rendered.must_include 'Sugar'
+				end
+
+				it 'displays the marked subitems' do
+					rendered.must_include 'Flour'
+				end
+			end
+		end
+
+		describe 'when there are marked items' do
+			before do
+				pie = item.create(list_id: list1.id, text: 'Pie', done: true, position: 0)
+				subitem.create(item_id: pie.id, text: 'Crust', done: false, position: 0)
+				subitem.create(item_id: pie.id, text: 'Filling', done: true, position: 0)
+				@lists = list.find_with_user_id(current_user.id)
+
+				@items = Array.new
+				@lists.each do |l|
+					@items[l.id] = Array.new
+					item_arr = item.find_by_list(l.id)
+					item_arr.each do |i|
+						@items[l.id].push(i)
+					end
+				end
+
+				@subitems = Array.new
+				@lists.each do |l|
+					@items[l.id].each do |i|
+						@subitems[i.id] = Array.new
+						subitem_arr = subitem.find_with_item(i.id)
+						subitem_arr.each do |s|
+							@subitems[i.id].push(s)
+						end
+					end
+				end
+
+			end
+
+			it 'displays the marked item' do
+				rendered.must_include 'Pie'
+			end
+
+			it 'does not display marked or unmarked subitems' do
+				rendered.wont_include 'Crust'
+				rendered.wont_include 'Filling'
+			end
+		end
+	end
 end
