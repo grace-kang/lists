@@ -27,7 +27,7 @@ describe ItemRepository do
 
   it 'finds subitems associated to item id' do
     cake = @repository.create(list_id: @list.id, text: 'Cake', done: false)
-    flour = subitem.create(item_id: cake.id, text: 'Flour', done: false)
+    flour = subitem.create(item_id: cake.id, text: 'Flour', done: false, position: 0)
     cake = @repository.find_subitems(cake.id)
 
     cake.subitems.must_include flour

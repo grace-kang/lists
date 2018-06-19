@@ -16,7 +16,7 @@ describe Web::Controllers::Subitem::Create do
 
     @user = user.create(email: 'email', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'token')
     @list = list.create(user_id: @user.id, name: 'Groceries', done: false, position: 0)
-    @item = item.create(list_id: @list.id, text: 'Cake Ingredients', done: false)
+    @item = item.create(list_id: @list.id, text: 'Cake Ingredients', done: false, position: 0)
   end
 
   describe 'with valid params' do

@@ -13,6 +13,11 @@ module Web::Controllers::Items
 
     def call(params)
       if params.valid?
+				list_id = params[:newitem][:list_id]
+				last_pos = 0
+				last_pos = item.last_position_given_list(list_id) + 1 if item.count_given_list(list_id) > 0
+				params[:newitem][:position] = last_pos
+
         item.create(params[:newitem])
 
         redirect_to '/home/index'

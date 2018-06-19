@@ -55,7 +55,7 @@ describe Web::Views::Home::Index do
 
     describe 'when there are unmarked items' do
       before do
-        item.create(list_id: list1.id, text: 'Mushrooms', done: false)
+        item.create(list_id: list1.id, text: 'Mushrooms', done: false, position: 0)
         exposures[:lists].map! { |l| list.find_items(l.id) }
         exposures[:lists].each { |l| l.items.map! { |i| item.find_subitems(i.id) } }
       end
@@ -67,9 +67,9 @@ describe Web::Views::Home::Index do
 
       describe 'when there are subitems' do
         before do
-          cake = item.create(list_id: list1.id, text: 'Cake Ingredients', done: false)
-          subitem.create(item_id: cake.id, text: 'Sugar', done: false)
-          subitem.create(item_id: cake.id, text: 'Flour', done: true)
+          cake = item.create(list_id: list1.id, text: 'Cake Ingredients', done: false, position: 0)
+          subitem.create(item_id: cake.id, text: 'Sugar', done: false, position: 0)
+          subitem.create(item_id: cake.id, text: 'Flour', done: true, position: 0)
           exposures[:lists].map! { |l| list.find_items(l.id) }
           exposures[:lists].each { |l| l.items.map! { |i| item.find_subitems(i.id) } }
         end
@@ -86,9 +86,9 @@ describe Web::Views::Home::Index do
 
     describe 'when there are marked items' do
       before do
-        pie = item.create(list_id: list1.id, text: 'Pie', done: true)
-        subitem.create(item_id: pie.id, text: 'Crust', done: false)
-        subitem.create(item_id: pie.id, text: 'Filling', done: true)
+        pie = item.create(list_id: list1.id, text: 'Pie', done: true, position: 0)
+        subitem.create(item_id: pie.id, text: 'Crust', done: false, position: 0)
+        subitem.create(item_id: pie.id, text: 'Filling', done: true, position: 0)
         exposures[:lists].map! { |l| list.find_items(l.id) }
         exposures[:lists].each { |l| l.items.map! { |i| item.find_subitems(i.id) } }
       end

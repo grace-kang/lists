@@ -14,7 +14,7 @@ describe Web::Controllers::Items::Unmark do
 
     @user = user.create(email: 'test', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'token')
     @list = list.create(user_id: @user.id, name: 'Groceries', done: false, position: 0)
-    @this_item = item.create(list_id: @list.id, text: 'Mushrooms', done: true)
+    @this_item = item.create(list_id: @list.id, text: 'Mushrooms', done: true, position: 0)
   end
 
   let(:params) { Hash[unmark_item: { id: @this_item.id }] }

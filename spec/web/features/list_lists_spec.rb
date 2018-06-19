@@ -36,8 +36,8 @@ describe 'List lists' do
 
   describe 'when there are items' do
     before do
-      @item1 = item.create(list_id: @list1.id, text: 'Mushrooms', done: false)
-      @item2 = item.create(list_id: @list2.id, text: 'Laundry', done: false)
+      @item1 = item.create(list_id: @list1.id, text: 'Mushrooms', done: false, position: 0)
+      @item2 = item.create(list_id: @list2.id, text: 'Laundry', done: false, position: 0)
       visit '/home/index'
     end
 
@@ -48,8 +48,8 @@ describe 'List lists' do
 
     describe 'when there are subitems' do
       before do
-        subitem.create(item_id: @item1.id, text: 'Crimini', done: false)
-        subitem.create(item_id: @item2.id, text: 'Bed Sheets', done: false)
+        subitem.create(item_id: @item1.id, text: 'Crimini', done: false, position: 0)
+        subitem.create(item_id: @item2.id, text: 'Bed Sheets', done: false, position: 0)
         visit '/home/index'
       end
 

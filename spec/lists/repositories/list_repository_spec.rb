@@ -26,7 +26,7 @@ describe ListRepository do
   end
 
   it 'can find all items associated to a list_id' do
-    item.create(list_id: @new_list.id, text: 'Mushrooms', done: false)
+    item.create(list_id: @new_list.id, text: 'Mushrooms', done: false, position: 0)
     groceries = @repository.find_items(@new_list.id)
 
     groceries.items.last.text.must_equal 'Mushrooms'

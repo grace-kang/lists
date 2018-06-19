@@ -16,8 +16,8 @@ describe Web::Controllers::Subitem::Mark do
 
     @user = user.create(email: 'email', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'token')
     @list = list.create(user_id: @user.id, name: 'Groceries', done: false, position: 0)
-    @item = item.create(list_id: @list.id, text: 'Cake', done: false)
-    @flour = subitem.create(item_id: @item.id, text: 'Flour', done: false)
+    @item = item.create(list_id: @list.id, text: 'Cake', done: false, position: 0)
+    @flour = subitem.create(item_id: @item.id, text: 'Flour', done: false, position: 0)
   end
 
   describe 'given the subitem id' do

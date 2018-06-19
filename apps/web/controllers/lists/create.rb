@@ -16,14 +16,12 @@ module Web::Controllers::Lists
     end
 
     def call(params)
-			if list.count > 0
-				pos = list.get_last_position + 1
-			else
-				pos = 0
-			end
-
 			if params.valid?
-				params[:new_list][:position] = pos
+				last_pos = 0
+				user_id = params[:new_list][:user_id]
+				last_pos = list.last_position_given_user(user_id) + 1 if list.count_given_user(user_id) > 0
+
+				params[:new_list][:position] = last_pos
       	list.create(params[:new_list])
 			end
 

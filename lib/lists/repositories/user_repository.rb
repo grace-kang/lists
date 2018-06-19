@@ -1,6 +1,6 @@
-class UserRepository < Hanami::Repository
-  associations do
-    has_many :lists
+class UserRepository < Hanami::Repository 
+	associations do 
+		has_many :lists
   end
 
   def find_by_email(email)
@@ -10,4 +10,8 @@ class UserRepository < Hanami::Repository
   def find_by_token(token)
     users.where(token: token).as(User).one
   end
+
+	def find_lists(id)
+		aggregate(:lists).where(id: id).as(User).one
+	end	
 end

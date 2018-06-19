@@ -4,7 +4,29 @@ class ItemRepository < Hanami::Repository
     has_many :subitems
   end
 
-  def find_subitems(id)
-    aggregate(:subitems).where(id: id).as(Item).one
+	def count_given_list(id)
+		items
+			.where(list_id: id)
+			.count
+	end
+
+	def last_position_given_list(id)
+		items
+			.where(list_id: id)
+			.max(:position)
+	end
+
+  def find_by_list(id)
+		items	
+			.where(list_id: id)
+			.order(:position)
   end
+	
+	def find_subitems(id)
+		aggregate(:subitems)
+			.order(:position)
+			.where(id: id)
+			.as(Item)
+			.one
+	end
 end

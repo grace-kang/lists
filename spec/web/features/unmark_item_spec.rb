@@ -12,7 +12,7 @@ describe 'Unmark a marked item' do
 
     @user = user.create(email: 'email', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'sometoken')
     @list = list.create(user_id: @user.id, name: 'Groceries', done: false, position: 0)
-    item.create(list_id: @list.id, text: 'Pepper', done: true)
+    item.create(list_id: @list.id, text: 'Pepper', done: true, position: 0)
 
     visit '/'
     click_button 'Log In'

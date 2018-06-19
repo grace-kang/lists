@@ -14,8 +14,8 @@ describe 'Unmark a marked subitem' do
 
     @user = user.create(email: 'email', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'token')
     @list = list.create(user_id: @user.id, name: 'Groceries', done: false, position: 0)
-    @item = item.create(list_id: @list.id, text: 'Cake', done: false)
-    subitem.create(item_id: @item.id, text: 'Flour', done: true)
+    @item = item.create(list_id: @list.id, text: 'Cake', done: false, position: 0)
+    subitem.create(item_id: @item.id, text: 'Flour', done: true, position: 0)
 
     visit '/'
     click_button 'Log In'
