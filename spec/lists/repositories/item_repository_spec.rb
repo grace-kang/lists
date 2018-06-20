@@ -18,7 +18,7 @@ describe ItemRepository do
   end
 
   it 'creates an item with attributes' do
-    item = @repository.create(list_id: @list.id, text: 'Mushrooms', done: false)
+    item = @repository.create(list_id: @list.id, text: 'Mushrooms', done: false, position: 0)
     last_item = @repository.last
 
     last_item.id.wont_be_nil
@@ -26,7 +26,7 @@ describe ItemRepository do
   end
 
   it 'finds subitems associated to item id' do
-    cake = @repository.create(list_id: @list.id, text: 'Cake', done: false)
+    cake = @repository.create(list_id: @list.id, text: 'Cake', done: false, position: 0)
     flour = subitem.create(item_id: cake.id, text: 'Flour', done: false, position: 0)
     cake = @repository.find_subitems(cake.id)
 

@@ -17,22 +17,22 @@ module Web::Controllers::Home
       @this_user = session[:current_user]
       @lists = list.find_with_user_id(@this_user.id)
 
-			@items = Array.new
+			@items = {}
 			@lists.each do |l|
-				@items[l.id] = Array.new
+				@items[:"#{ l.id }"] = []
 				item_arr = item.find_by_list(l.id)
 				item_arr.each do |i|
-					@items[l.id].push(i)
+					@items[:"#{ l.id }"].push(i)
 				end
 			end
 
-			@subitems = Array.new
+			@subitems = {}
 			@lists.each do |l|
-				@items[l.id].each do |i|
-					@subitems[i.id] = Array.new
+				@items[:"#{ l.id }"].each do |i|
+					@subitems[:"#{ i.id }"] = []
 					subitem_arr = subitem.find_with_item(i.id)
 					subitem_arr.each do |s|
-						@subitems[i.id].push(s)
+						@subitems[:"#{ i.id }"].push(s)
 					end
 				end
 			end

@@ -14,8 +14,8 @@ describe Web::Views::Home::Index do
 		subitem.clear
 	end
 
-	let(:current_user) { user.create(email: 'email', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'sometoken') }
-	let(:exposures) { Hash[lists: [], this_user: current_user, params: {}, items: [], subitems: []] }
+	let(:this_user) { user.create(email: 'email', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'token') }
+	let(:exposures) { Hash[lists: [], this_user: this_user, items: {}, subitems: {}, params: {}] }
 	let(:template)  { Hanami::View::Template.new('apps/web/templates/home/index.html.erb') }
 	let(:view)      { Web::Views::Home::Index.new(template, exposures) }
 	let(:rendered)  { view.render }
@@ -28,40 +28,24 @@ describe Web::Views::Home::Index do
 		view.this_user.must_equal exposures.fetch(:this_user)
 	end
 
-	describe 'when there are no lists' do
+	it 'exposes #items' do
+		view.items.must_equal exposures.fetch(:items)
+	end
+
+	it 'exposes #subitems' do
+		view.subitems.must_equal exposures.fetch(:subitems)
+	end
+describe 'when there are no lists' do
 		it 'shows a placeholder message' do
 			rendered.must_include('You do not have any lists yet.')
 		end
 	end
 
 	describe 'when there are lists' do
-		let(:list1)     { list.create(user_id: current_user.id, name: 'Groceries', done: false, position: 0) }
-		let(:list2)     { list.create(user_id: current_user.id, name: 'Homework', done: false, position: 0) }
-		let(:exposures) { Hash[lists: [list1, list2], this_user: current_user, params: {}] }
-
-		before do
-			@lists = list.find_with_user_id(current_user.id)
-
-			@items = Array.new
-			@lists.each do |l|
-				@items[l.id] = Array.new
-				item_arr = item.find_by_list(l.id)
-				item_arr.each do |i|
-					@items[l.id].push(i)
-				end
-			end
-
-			@subitems = Array.new
-			@lists.each do |l|
-				@items[l.id].each do |i|
-					@subitems[i.id] = Array.new
-					subitem_arr = subitem.find_with_item(i.id)
-					subitem_arr.each do |s|
-						@subitems[i.id].push(s)
-					end
-				end
-			end
-		end
+		let(:this_user) { user.create(email: 'email', hashed_pass: hashed_password('pass'), email_confirmed: true, token: 'token') }
+		let(:list1)     { list.create(user_id: this_user.id, name: 'Groceries', done: false, position: 0) }
+  	let(:list2)     { list.create(user_id: this_user.id, name: 'Homework', done: false, position: 1) }
+		let(:exposures) { Hash[lists: [list1, list2], this_user: this_user, items: { "#{ list1.id }": [], "#{ list2.id }": []}, subitems: {}, params: {}] }
 
 		it 'lists them all' do
 			rendered.must_include('Groceries')
@@ -73,63 +57,17 @@ describe Web::Views::Home::Index do
 		end
 
 		describe 'when there are unmarked items' do
-			before do
-				item.create(list_id: list1.id, text: 'Mushrooms', done: false, position: 0)
-				@lists = list.find_with_user_id(current_user.id)
-
-				@items = Array.new
-				@lists.each do |l|
-					@items[l.id] = Array.new
-					item_arr = item.find_by_list(l.id)
-					item_arr.each do |i|
-						@items[l.id].push(i)
-					end
-				end
-
-				@subitems = Array.new
-				@lists.each do |l|
-					@items[l.id].each do |i|
-						@subitems[i.id] = Array.new
-						subitem_arr = subitem.find_with_item(i.id)
-						subitem_arr.each do |s|
-							@subitems[i.id].push(s)
-						end
-					end
-				end
-			end
+			let(:item1) { item.create(list_id: list1.id, text: 'item1', done: false, position: 0) }
+			let(:exposures) { Hash[lists: [list1, list2], this_user: this_user, items: { "#{ list1.id }": [item1], "#{ list2.id }": [] }, subitems: { "#{ item1.id }": [] } , params: {} ] }
 
 			it 'lists item' do
-				rendered.scan(/id="items"/).count.must_equal 1
-				rendered.must_include 'Mushrooms'
+				rendered.must_include 'item1'
 			end
 
 			describe 'when there are subitems' do
-				before do
-					cake = item.create(list_id: list1.id, text: 'Cake Ingredients', done: false, position: 0)
-					subitem.create(item_id: cake.id, text: 'Sugar', done: false, position: 0)
-					subitem.create(item_id: cake.id, text: 'Flour', done: true, position: 0)
-					@lists = list.find_with_user_id(current_user.id)
-
-					@items = Array.new
-					@lists.each do |l|
-						@items[l.id] = Array.new
-						item_arr = item.find_by_list(l.id)
-						item_arr.each do |i|
-							@items[l.id].push(i)
-						end
-					end
-
-					@subitems = Array.new
-					@lists.each do |l|
-						@items[l.id].each do |i|
-							@subitems[i.id] = Array.new
-							subitem_arr = subitem.find_with_item(i.id)
-							subitem_arr.each do |s|
-								@subitems[i.id].push(s)
-							end
-						end
-					end
-				end
+				let(:subitem1) { subitem.create(item_id: item1.id, text: 'Sugar', done: false, position: 0) }
+				let(:subitem2) { subitem.create(item_id: item1.id, text: 'Flour', done: true, position: 1) }
+				let(:exposures) { Hash[lists: [list1, list2], this_user: this_user, items: { "#{ list1.id }": [item1], "#{ list2.id }": [] }, subitems: { "#{ item1.id }": [subitem1, subitem2] }, params: {}] }
 
 				it 'displays the unmarked subitems' do
 					rendered.must_include 'Sugar'
@@ -142,33 +80,12 @@ describe Web::Views::Home::Index do
 		end
 
 		describe 'when there are marked items' do
-			before do
-				pie = item.create(list_id: list1.id, text: 'Pie', done: true, position: 0)
-				subitem.create(item_id: pie.id, text: 'Crust', done: false, position: 0)
-				subitem.create(item_id: pie.id, text: 'Filling', done: true, position: 0)
-				@lists = list.find_with_user_id(current_user.id)
+			let(:pie) { item.create(list_id: list2.id, text: 'Pie', done: true, position: 0) }
+			let(:crust) { subitem.create(item_id: pie.id, text: 'Crust', done: false, position: 0) }
+			let(:filling) { subitem.create(item_id: pie.id, text: 'Filling', done: true, position: 1) }
+			let(:exposures) { Hash[lists: [list1, list2], this_user: this_user, items: { "#{ list1.id }": [], "#{ list2.id }": [pie] }, subitems: { "#{ pie.id }": [crust, filling] }, params: {}] }
 
-				@items = Array.new
-				@lists.each do |l|
-					@items[l.id] = Array.new
-					item_arr = item.find_by_list(l.id)
-					item_arr.each do |i|
-						@items[l.id].push(i)
-					end
-				end
 
-				@subitems = Array.new
-				@lists.each do |l|
-					@items[l.id].each do |i|
-						@subitems[i.id] = Array.new
-						subitem_arr = subitem.find_with_item(i.id)
-						subitem_arr.each do |s|
-							@subitems[i.id].push(s)
-						end
-					end
-				end
-
-			end
 
 			it 'displays the marked item' do
 				rendered.must_include 'Pie'

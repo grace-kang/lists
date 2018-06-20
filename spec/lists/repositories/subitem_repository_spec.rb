@@ -20,7 +20,7 @@ describe SubitemRepository do
   end
 
   it 'creates a new subitem' do
-    @repository.create(item_id: @item.id, text: 'Flour', done: false)
+    @repository.create(item_id: @item.id, text: 'Flour', done: false, position: 0)
     last_subitem = @repository.last
 
     last_subitem.id.wont_be_nil

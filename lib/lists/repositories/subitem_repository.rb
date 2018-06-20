@@ -19,5 +19,6 @@ class SubitemRepository < Hanami::Repository
 		subitems
 			.where(item_id: id)
 			.order(:position)
+			.to_a
 		end
 end

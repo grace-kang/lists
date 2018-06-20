@@ -20,6 +20,7 @@ class ItemRepository < Hanami::Repository
 		items	
 			.where(list_id: id)
 			.order(:position)
+			.to_a
   end
 	
 	def find_subitems(id)

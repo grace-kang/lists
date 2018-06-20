@@ -74,9 +74,9 @@
 				</div>
 
 				<%# list all items in a list %>
-				<% if items[list.id].any? %>
+				<% if items[:"#{ list.id }"].any? %>
 					<div name="item_container">
-						<% items[list.id].each do |item| %>
+						<% items[:"#{ list.id }"].each do |item| %>
 							<div data-id=<%= item.id %> class="item">
 
 								<%# list not done items %>
@@ -111,9 +111,9 @@
 									</div>
 
 									<%# list subitems if any %>
-									<% if subitems[item.id].any? %>
+									<% if subitems[:"#{ item.id }"].any? %>
 										<div name="subitem_container">
-											<% subitems[item.id].each do |subitem|%>
+											<% subitems[:"#{ item.id }"].each do |subitem|%>
 												<div data-id=<%= subitem.id %> class="subitem">
 													<% if !subitem.done %>
 														<div class="flex justify-between">
