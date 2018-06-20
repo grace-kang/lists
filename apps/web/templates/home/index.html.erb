@@ -1,7 +1,7 @@
 <%# logout button %>
 <%=
 	form_for :session, '/sessions/logout', method: :delete do
-		submit 'Log Out', class: "hover:bg-grey-light font-semibold border border-2 border-grey text-sm rounded text-grey-dark px-2 py-1 mx-2"
+		submit 'Log Out', class: "hover:bg-grey hover:text-white bg-white font-semibold border border-2 border-grey text-sm rounded text-grey-dark px-2 py-1 mx-2"
 	end
 %>
 
@@ -21,10 +21,10 @@
 <% if lists.any? %>
 	<div id="list_container" class="flex flex-wrap my-3 mx-4">
 		<% lists.each do |list| %>
-			<div data-id=<%= list.id %> class="list self-start overflow-hidden shadow-md px-6 py-4 mx-2 my-2">
+			<div data-id=<%= list.id %> class="list self-start bg-white overflow-hidden py-4 mx-2 my-2">
 				<div class="flex flex-wrap justify-between my-3">
 
-					<div class="flex justify-left">
+					<div class="px-6 flex justify-left">
 						<%# rename list button %>
 						<button name="rename_list" class="mx-2"><%= image 'edit.png', width: 20, length: 20 %></button>
 
@@ -60,7 +60,7 @@
 					</div>
 					<%= javascript 'update_list' %>
 
-					<div name="delete_list">
+					<div name="delete_list" class="px-6">
 						<%=
 							form_for :delete_list, '/lists/destroy',method: :delete do
 								hidden_field :id, value: list.id
@@ -77,7 +77,7 @@
 				<% if items[:"#{ list.id }"].any? %>
 					<div name="item_container">
 						<% items[:"#{ list.id }"].each do |item| %>
-							<div data-id=<%= item.id %> class="item">
+							<div data-id=<%= item.id %> class="item pt-2 px-4">
 
 								<%# list not done items %>
 								<% if !item.done %>
@@ -105,7 +105,7 @@
 										<%=
 											form_for :delete_item, '/items/destroy', method: :delete do
 												hidden_field :id, value: item.id
-												submit 'x', class: 'bg-white text-sm font-semibold text-grey-dark mx-3 rounded'
+												submit 'x', class: 'text-sm font-semibold text-grey-dark mx-3 rounded'
 											end
 										%>
 									</div>
@@ -129,7 +129,7 @@
 														<%= 
 															form_for :delete_subitem, '/subitem/destroy', method: :delete do
 																hidden_field :id, value: subitem.id
-																submit 'x', class: 'bg-white text-sm font-semibold text-grey-dark mx-3 rounded'
+																submit 'x', class: 'text-sm font-semibold text-grey-dark mx-3 rounded'
 															end
 														%>
 														</div>
@@ -149,7 +149,7 @@
 														<%= 
 															form_for :delete_subitem, '/subitem/destroy', method: :delete do
 																hidden_field :id, value: subitem.id
-																submit 'x', class: 'bg-white text-sm font-semibold text-grey-dark mx-3 rounded'
+																submit 'x', class: 'text-sm font-semibold text-grey-dark mx-3 rounded'
 															end
 														%> 
 														</div>
@@ -163,7 +163,7 @@
 									<%# hidden add subitem form %>
 									<div name="subitem_form" style="display:none">
 										<%= 
-											form_for :newsubitem, '/subitem', class: 'px-6' do
+											form_for :newsubitem, '/subitem', class: 'px-4' do
 												hidden_field :item_id, value: item.id
 												hidden_field :done, value: false
 												text_field :text, class: "border shadow parent text-grey-darker px-2 py-2", placeholder: 'New Subitem'
@@ -208,7 +208,7 @@
 
 				<%# add new item form %>
 				<%=
-					form_for :newitem, '/items' do
+					form_for :newitem, '/items', class: 'px-6' do
 						div class: 'input' do
 							text_field :text, class: "border shadow parent w-full text-grey-darker py-2 px-3 my-2", placeholder: 'New Item'
 						end

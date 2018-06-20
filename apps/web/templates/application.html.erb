@@ -1,19 +1,19 @@
 <%= stylesheet 'application' %>
-<%= stylesheet 'output' %>
+<%= stylesheet 'new_output' %>
 <%= stylesheet 'index' %>
 <%= javascript 'Sortable' %>
 
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Lists</title>
-    <%= favicon %>
+	<head>
+		<title>Lists</title>
+		<%= favicon %>
 		<meta name="csrf" content= <%= csrf_token %>>
-  </head>
-  <body>
-    <div class="p-6 mb-4 bg-grey-light">
-      <div class="text-center font-semibold text-5xl text-white tracking-wide">lists</div>
-    </div>
-      <%= yield %>
-  </body>
+	</head>
+	<body class="bg-grey-lighter h-screen">
+		<div class="p-6 mb-4 bg-white">
+			<div class="text-center font-semibold text-5xl text-grey-dark tracking-wide">lists</div>
+		</div>
+		<%= yield %>
+	</body>
 </html>

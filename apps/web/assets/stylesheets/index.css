@@ -1,7 +1,6 @@
 .sortable-ghost {
-	background-color: lightgrey;
+	background-color: #F1F5F8;
 }
 
 .sortable-drag {
-	border: 1px solid lightgrey;
 }
