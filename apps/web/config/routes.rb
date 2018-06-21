@@ -31,3 +31,5 @@ resources :subitem, only: [:create, :destroy] do
   end
 end
 
+get '/users/forgot_pass', to: 'users#forgot_pass'
+get '/users/:token/new_pass', to: 'users#new_pass'

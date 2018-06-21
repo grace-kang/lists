@@ -1,14 +1,15 @@
-<%= stylesheet 'application' %>
-<%= stylesheet 'new_output' %>
-<%= stylesheet 'index' %>
-<%= javascript 'Sortable' %>
-
 <!DOCTYPE html>
 <html>
 	<head>
+		<%= stylesheet 'application' %>
+		<%= stylesheet 'new_output' %>
+		<%= stylesheet 'index' %>
+		<%= javascript 'Sortable' %>
+		<%= javascript 'app' %>
+		<meta name="csrf" content= <%= csrf_token %>>
+
 		<title>Lists</title>
 		<%= favicon %>
-		<meta name="csrf" content= <%= csrf_token %>>
 	</head>
 	<body class="bg-grey-lighter h-screen">
 		<div class="p-6 mb-4 bg-white">
