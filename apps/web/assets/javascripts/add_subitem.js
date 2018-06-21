@@ -21,17 +21,11 @@ addEventListener("click", function(event){
 
     
   if (isClickInside) {
-    show(subitem_form[index]);
+		subitem_form[index].style.height = "50px";
   } else {
-    subitem_form.forEach(hide);
+		for (var i = 0; i < subitem_form.length; i++) {
+			subitem_form[i].style.height = "0";
+		}
   }
 });
-
-function show(item) {
-  item.style.display="block";
-}
- 
-function hide(item) {
-  item.style.display="none";
-}
 

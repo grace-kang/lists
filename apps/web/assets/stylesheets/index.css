@@ -3,5 +3,8 @@
 }
 
 .add_subitem {
-	transition: all .2s ease-out;
+	transition: height 0.5s;
+	height: 0;
+	overflow: hidden;
 }
+

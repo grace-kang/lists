@@ -8,11 +8,11 @@
 <%# new list form %>
 <div class="flex justify-center">
 	<%=
-		form_for :new_list, '/lists', class: "w-full max-w-xs" do
+		form_for :new_list, '/lists', class: "max-w-xs" do
 			text_field :name, class: "border shadow parent text-grey-darker py-2 px-3 my-2", placeholder: 'List Name'
 			hidden_field :user_id, value: this_user.id
 			hidden_field :done, value: false
-			submit 'Create', class:"bg-grey hover:bg-grey-dark font-semibold text-sm text-white py-1 px-2 rounded"
+			submit 'Create', class:"bg-grey hover:bg-grey-dark font-semibold text-sm text-white py-1 px-2 mx-2 rounded"
 		end
 	%>
 </div>
@@ -22,7 +22,7 @@
 	<div id="list_container" class="flex flex-wrap my-3 mx-4">
 		<% lists.each do |list| %>
 			<div data-id=<%= list.id %> class="list self-start bg-white overflow-hidden py-4 mx-2 my-2">
-				<div class="flex flex-wrap justify-between my-3">
+				<div class="flex justify-between my-3">
 
 					<div class="px-6 flex justify-left">
 						<%# rename list button %>
@@ -37,28 +37,28 @@
 										submit list.name, class: 'text-2xl font-bold text-grey-dark'
 									end
 								%>
-						<% else %>
+							<% else %>
+								<%=
+									form_for :unmark_list, '/lists/unmark' do
+										hidden_field :id, value: list.id
+										submit list.name, class: 'text-2xl font-bold text-grey line-through'
+									end
+								%>
+							<% end %>
+						</div>
+
+						<%# hidden list update form %>
+						<div name="list_form" style="display:none">
 							<%=
-								form_for :unmark_list, '/lists/unmark' do
+								form_for :update_list, '/lists/update' do
+									text_field :name, autofocus: 'autofocus', class: "border shadow parent w-full text-grey-darker py-2 px-3", placeholder: 'New Name'
 									hidden_field :id, value: list.id
-									submit list.name, class: 'text-2xl font-bold text-grey line-through'
+									submit ''
 								end
 							%>
-					<% end %>
 						</div>
+						<%= javascript 'update_list' %>
 					</div>
-
-					<%# hidden list update form %>
-					<div name="list_form" style="display:none">
-						<%=
-							form_for :update_list, '/lists/update' do
-								text_field :name, autofocus: 'autofocus', class: "border shadow parent w-full text-grey-darker py-2 px-3", placeholder: 'New Name'
-								hidden_field :id, value: list.id
-								submit ''
-							end
-						%>
-					</div>
-					<%= javascript 'update_list' %>
 
 					<div name="delete_list" class="px-6">
 						<%=
@@ -161,9 +161,9 @@
 
 
 									<%# hidden add subitem form %>
-									<div id="add_subitem" name="subitem_form" style="display:none">
+									<div class="add_subitem" name="subitem_form">
 										<%= 
-											form_for :newsubitem, '/subitem', class: 'px-4' do
+											form_for :newsubitem, '/subitem', class: 'px-4 py-2' do
 												hidden_field :item_id, value: item.id
 												hidden_field :done, value: false
 												text_field :text, class: "border shadow parent text-grey-darker px-2 py-2", placeholder: 'New Subitem'
@@ -192,13 +192,13 @@
 											end
 										%>
 
-                    <%# delete item button %>
-                    <%=
-                      form_for :delete_item, '/items/destroy', method: :delete do
-                        hidden_field :id, value: item.id
-                        submit 'x', class: 'bg-white text-sm font-semibold text-grey-dark mx-3 rounded'
-                      end
-                    %>
+									<%# delete item button %>
+									<%=
+										form_for :delete_item, '/items/destroy', method: :delete do
+											hidden_field :id, value: item.id
+											submit 'x', class: 'bg-white text-sm font-semibold text-grey-dark mx-3 rounded'
+										end
+									%>
 									</div>
 								<% end %>
 							</div>
@@ -208,18 +208,11 @@
 
 				<%# add new item form %>
 				<%=
-					form_for :newitem, '/items', class: 'px-6' do
-						div class: 'input' do
-							text_field :text, class: "border shadow parent w-full text-grey-darker py-2 px-3 my-2", placeholder: 'New Item'
-						end
-
+					form_for :newitem, '/items', class: 'px-6 pt-2' do
+						text_field :text, class: "border shadow parent text-grey-darker py-2 px-3 my-2", placeholder: 'New Item'
 						hidden_field :done, value: false
-
 						hidden_field :list_id, value: list.id
-
-						div class: 'controls' do
-							submit 'Add', class:"bg-grey hover:bg-grey-dark font-semibold text-sm text-white py-1 px-2 rounded"
-						end
+						submit 'Add', class:"bg-grey hover:bg-grey-dark font-semibold text-sm text-white py-1 px-2 rounded"
 					end
 				%>
 
