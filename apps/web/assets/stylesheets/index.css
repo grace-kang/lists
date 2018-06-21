@@ -2,5 +2,6 @@
 	background-color: #F1F5F8;
 }
 
-.sortable-drag {
+.add_subitem {
+	transition: all .2s ease-out;
 }

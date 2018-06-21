@@ -77,7 +77,7 @@
 				<% if items[:"#{ list.id }"].any? %>
 					<div name="item_container">
 						<% items[:"#{ list.id }"].each do |item| %>
-							<div data-id=<%= item.id %> class="item pt-2 px-4">
+							<div id="item" data-id=<%= item.id %> class="item py-2 px-4">
 
 								<%# list not done items %>
 								<% if !item.done %>
@@ -85,11 +85,11 @@
 										<div class= "flex content-center">
 
 											<%# add subitem button %>
-											<button name="subitem_button" class="text-grey-dark font-semibold my-1">+</button>
+											<button name="subitem_button" class="text-grey-dark font-semibold">+</button>
 
 											<%# item name, click to mark %>
 											<%= 
-												form_for :mark_item, '/items/mark' do
+												form_for :mark_item, '/items/mark', class: 'my-1' do
 													div class: 'input' do
 														hidden_field :id, value: item.id
 													end
@@ -103,7 +103,7 @@
 
 										<%# delete item button %>
 										<%=
-											form_for :delete_item, '/items/destroy', method: :delete do
+											form_for :delete_item, '/items/destroy', method: :delete, class: 'mb-0' do
 												hidden_field :id, value: item.id
 												submit 'x', class: 'text-sm font-semibold text-grey-dark mx-3 rounded'
 											end
@@ -114,12 +114,12 @@
 									<% if subitems[:"#{ item.id }"].any? %>
 										<div name="subitem_container">
 											<% subitems[:"#{ item.id }"].each do |subitem|%>
-												<div data-id=<%= subitem.id %> class="subitem">
+												<div data-id=<%= subitem.id %> class="subitem py-2">
 													<% if !subitem.done %>
 														<div class="flex justify-between">
 															<%# subitem text, click to mark %>
 															<%= 
-																form_for :mark_subitem, '/subitem/mark' do
+																form_for :mark_subitem, '/subitem/mark', class: 'mb-0' do
 																	hidden_field :id, value: subitem.id
 																	submit subitem.text, class:"text-grey-darker mx-3 overflow-auto px-6"
 																end
@@ -127,7 +127,7 @@
 
 														<%# delete subitem button %>
 														<%= 
-															form_for :delete_subitem, '/subitem/destroy', method: :delete do
+															form_for :delete_subitem, '/subitem/destroy', method: :delete, class: 'mb-0' do
 																hidden_field :id, value: subitem.id
 																submit 'x', class: 'text-sm font-semibold text-grey-dark mx-3 rounded'
 															end
@@ -139,7 +139,7 @@
 														<div class="flex justify-between">
 															<%# subitem text, click to unmark %>
 															<%=
-																form_for :unmark_subitem, '/subitem/unmark' do
+																form_for :unmark_subitem, '/subitem/unmark', class: 'mb-0' do
 																	hidden_field :id, value: subitem.id
 																	submit subitem.text, class:"text-grey mx-3 line-through overflow-auto px-6"
 																end
@@ -147,7 +147,7 @@
 
 														<%# delete subitem button %>
 														<%= 
-															form_for :delete_subitem, '/subitem/destroy', method: :delete do
+															form_for :delete_subitem, '/subitem/destroy', method: :delete, class: 'mb-0' do
 																hidden_field :id, value: subitem.id
 																submit 'x', class: 'text-sm font-semibold text-grey-dark mx-3 rounded'
 															end
@@ -161,7 +161,7 @@
 
 
 									<%# hidden add subitem form %>
-									<div name="subitem_form" style="display:none">
+									<div id="add_subitem" name="subitem_form" style="display:none">
 										<%= 
 											form_for :newsubitem, '/subitem', class: 'px-4' do
 												hidden_field :item_id, value: item.id
