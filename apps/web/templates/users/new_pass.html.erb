@@ -1,0 +1,24 @@
+<div class='text-center text-grey-dark text-2xl my-8 font-bold'>New Password</div>
+
+<div class='flex justify-center'>
+  <%=
+		form_for :new_pass, '/users/update' do
+			hidden_field :id, value: this_user.id
+      div class: 'password-input' do
+        text_field :password, type: 'password', class: 'border shadow parent w-full text-grey-darker py-2 px-3 my-2', placeholder: 'Password'
+      end
+
+      div class: 'password-confirmation-input' do
+        text_field :password_confirmation, type: 'password', class: 'border shadow parent w-full text-grey-darker py-2 px-3 my-2', placeholder: 'Confirm Password'
+      end
+
+      submit 'Confirm', class: 'bg-grey hover:bg-grey-dark font-semibold text-sm text-white py-1 px-2 my-4 rounded'
+    end
+  %>
+</div>
+
+<div class='flex flex-col'>
+  <% unless flash[:error].nil? %>
+    <div class='text-center text-red text-xs italic'><%= flash[:error] %></div>
+  <% end %>
+</div>

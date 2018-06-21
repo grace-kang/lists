@@ -1,0 +1,10 @@
+<body>
+	<h3>Hi <%= user.email %>,</h3>
+
+	<p>Please click on the link below to reset your password.<br>
+	If you did not attempt to recover your password, please ignore this email.<br><br>
+
+	<%= link_to 'Forgot Password', "https://lists-web.herokuapp.com#{ Web.routes.new_pass_path(user.token) }" %>
+
+	</p>
+</body>

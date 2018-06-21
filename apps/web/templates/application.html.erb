@@ -12,8 +12,12 @@
 		<%= favicon %>
 	</head>
 	<body class="bg-grey-lighter h-screen">
-		<div class="p-6 mb-4 bg-white">
-			<div class="text-center font-semibold text-5xl text-grey-dark tracking-wide">lists</div>
+		<div class="p-6 mb-4 bg-white flex justify-center">
+			<%=
+				form_for :home, '/home/index', method: 'GET' do
+					submit 'lists', class: 'font-semibold text-5xl text-grey-dark tracking-wide'
+				end
+			%>
 		</div>
 		<%= yield %>
 	</body>

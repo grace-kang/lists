@@ -4,6 +4,10 @@ get '/home/index', to: 'home#index'
 resources :users, only: [:new, :create]
 get '/users/confirm/:token', to: 'users#confirm', as: :confirm_email
 post '/users/update_order', to: 'users#update_order'
+get '/users/forgot_pass', to: 'users#forgot_pass'
+get '/users/new_pass/:token', to: 'users#new_pass', as: :new_pass
+get '/users/update_pass', to: 'users#update_pass'
+get '/users/send_recovery', to: 'users#send_recovery'
 
 resources :sessions, only: [:new, :create, :destroy]
 
@@ -31,5 +35,3 @@ resources :subitem, only: [:create, :destroy] do
   end
 end
 
-get '/users/forgot_pass', to: 'users#forgot_pass'
-get '/users/:token/new_pass', to: 'users#new_pass'
