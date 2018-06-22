@@ -1,20 +1,8 @@
 <div class='text-5xl text-grey-dark ml-3 my-8'>Welcome.</div>
 
 <div class='flex flex-col'>
-	<% unless flash[:signup_success].nil? %>
-		<div class='text-center text-red text-xs italic'><%= flash[:signup_success] %></div>
-	<% end %>
-  <% unless flash[:confirmed].nil? %>
-    <div class='text-center text-red text-xs italic'><%= flash[:confirmed] %></div>
-	<% end %>
-	<% unless flash[:recovery].nil? %>
-		<div class='text-center text-red text-xs italic'><%= flash[:recovery] %></div>
-	<% end %>
-	<% unless flash[:recovery_error].nil? %>
-		<div class='text-center text-red text-xs italic'><%= flash[:recovery_error] %></div>
-	<% end %>
-	<% unless flash[:pass_updated].nil? %>
-		<div class='text-center text-red text-xs italic'><%= flash[:pass_updated] %></div>
+	<% unless flash[:message].nil? %>
+		<div class='text-center text-red text-xs italic'><%= flash[:message] %></div>
 	<% end %>
 </div>
  

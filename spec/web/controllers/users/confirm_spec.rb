@@ -18,7 +18,7 @@ describe Web::Controllers::Users::Confirm do
       user1 = user.find(@this_user.id)
 
       user1.email_confirmed.must_equal true
-      action.exposures[:flash][:confirmed].must_equal 'Successfully confirmed email! You may log in.'
+      action.exposures[:flash][:message].must_equal 'Successfully confirmed email! You may log in.'
       response[1]['Location'].must_equal '/'
     end
   end
@@ -29,7 +29,7 @@ describe Web::Controllers::Users::Confirm do
     it 'returns an error and redirects to root' do
       response = action.call(params)
 
-      action.exposures[:flash][:error].must_equal 'Error confirming email.'
+      action.exposures[:flash][:message].must_equal 'Error confirming email.'
       response[1]['Location'].must_equal '/'
     end
   end

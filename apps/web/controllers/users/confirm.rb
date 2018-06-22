@@ -7,9 +7,9 @@ module Web::Controllers::Users
       this_user = user.find_by_token(params[:token])
       if this_user
         user.update(this_user.id, email_confirmed: true)
-        flash[:confirmed] = 'Successfully confirmed email! You may log in.'
+        flash[:message] = 'Successfully confirmed email! You may log in.'
       else
-        flash[:error] = 'Error confirming email.'
+        flash[:message] = 'Error confirming email.'
       end
       redirect_to '/'
     end

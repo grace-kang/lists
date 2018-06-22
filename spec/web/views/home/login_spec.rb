@@ -12,7 +12,7 @@ describe Web::Views::Home::Login do
   end
 
   describe 'with flash message' do
-    let(:exposures) { Hash[flash: { signup_success: 'Successfully signed up! Please log in.' }, params: {}] }
+    let(:exposures) { Hash[flash: { message: 'Successfully signed up! Please log in.' }, params: {}] }
 
     it 'displays the flash message' do
       rendered.must_include 'Successfully signed up! Please log in.'

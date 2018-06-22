@@ -5,7 +5,6 @@ module Web::Controllers::Users
 
     def call(params)
 			order = JSON.parse(params[:order])
-			puts order
 			order.each { |key, value| list.update(key, position: value) }
 			
 			redirect_to '/home/index'
