@@ -2,8 +2,10 @@
 
 <div class='flex justify-center'>
   <%=
-		form_for :new_pass, '/users/update' do
+		form_for :new_pass, '/users/update_pass' do
 			hidden_field :id, value: this_user.id
+			hidden_field :old_pass, value: this_user.hashed_pass
+			hidden_field :token, value: this_user.token
       div class: 'password-input' do
         text_field :password, type: 'password', class: 'border shadow parent w-full text-grey-darker py-2 px-3 my-2', placeholder: 'Password'
       end
@@ -18,7 +20,9 @@
 </div>
 
 <div class='flex flex-col'>
-  <% unless flash[:error].nil? %>
-    <div class='text-center text-red text-xs italic'><%= flash[:error] %></div>
+  <% unless flash[:input_errors].nil? %>
+		<% flash[:input_errors].each do |message| %>
+	    <div class='text-center text-red text-xs italic'><%= message %></div>
+		<% end %>
   <% end %>
 </div>

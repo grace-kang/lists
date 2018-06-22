@@ -13,6 +13,9 @@
 	<% unless flash[:recovery_error].nil? %>
 		<div class='text-center text-red text-xs italic'><%= flash[:recovery_error] %></div>
 	<% end %>
+	<% unless flash[:pass_updated].nil? %>
+		<div class='text-center text-red text-xs italic'><%= flash[:pass_updated] %></div>
+	<% end %>
 </div>
  
 
