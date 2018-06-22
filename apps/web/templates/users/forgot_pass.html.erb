@@ -1,3 +1,11 @@
+<div class="p-6 mb-4 bg-white flex justify-center">
+  <%=
+    form_for :home, '/home/index', method: 'GET' do
+      submit 'lists', class: 'font-semibold text-5xl text-grey-dark tracking-wide'
+    end
+  %>
+</div>
+
 <div class='text-center text-grey-dark text-2xl my-8 font-bold'>Forgot Password</div>
 <div class='flex justify-center'>
 	<%=
