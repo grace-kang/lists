@@ -4,7 +4,7 @@
 	<p>Please click on the link below to reset your password.<br>
 	If you did not attempt to reset your password, please ignore this email.<br><br>
 
-	<%= link_to 'Reset Password', Web.routes.new_pass_url(user.token)  %>
+	<%= link_to 'Reset Password', "https://lists-web.herokuapp.com#{ Web.routes.new_pass_url(user.token) }" %>
 
 	</p>
 </body>
