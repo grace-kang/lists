@@ -1,8 +1,39 @@
 {
   "devDependencies": {
-    "tailwindcss": "^0.5.3"
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "stats-webpack-plugin": "*",
+    "webpack": "^4.12.1",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "*"
   },
   "dependencies": {
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "node": "^10.5.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
     "sortablejs": "^1.7.0"
-  }
+  },
+  "name": "myApp",
+  "description": "Lists is a minimal web application that allows you to create, edit, and delete your own lists all in one simple page.",
+  "version": "0.0.1",
+  "main": "lists.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grace-kang/lists.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/grace-kang/lists/issues"
+  },
+  "homepage": "https://github.com/grace-kang/lists#readme"
 }

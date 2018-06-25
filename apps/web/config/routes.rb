@@ -1,5 +1,6 @@
 root to: 'home#login'
 get '/home/index', to: 'home#index'
+get '/home/test', to: 'home#test'
 
 resources :users, only: [:new, :create]
 get '/users/confirm/:token', to: 'users#confirm', as: :confirm_email
