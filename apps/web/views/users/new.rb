@@ -1,5 +1,5 @@
 module Web::Views::Users
-  class Create
+  class New
     include Web::View
   end
 end
