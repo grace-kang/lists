@@ -235,12 +235,6 @@
 <% end %>
 
 <div id="root"></div>
-<% if lists.any? %>
-	<% lists.each do |list| %>
-		<div name="list"><%= Hanami::Utils::Json.generate(list) %></div>
-	<% end %>
-<% end %>
-
-
+<div id "user_id"><%= this_user.id %></div>
 
 <%= javascript 'index_bundle' %>

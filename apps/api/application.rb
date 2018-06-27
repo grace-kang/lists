@@ -1,7 +1,7 @@
 require 'hanami/helpers'
 require 'hanami/assets'
 
-module Api
+module API
   class Application < Hanami::Application
     configure do
       ##
