@@ -13,9 +13,10 @@ function ListContainer(props) {
 }
 
 
-const user_id = document.getElementById('user_id');
+const user_id = document.getElementById('user_id').innerHTML;
 const csrf = document.getElementsByName('csrf')[0].content;
 const list_array = getLists(user_id);
+console.log(user_id);
 console.log(list_array);
 
 ReactDOM.render(
