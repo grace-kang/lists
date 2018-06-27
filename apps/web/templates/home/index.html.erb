@@ -1,3 +1,4 @@
+<% if false %>
 <div class="p-6 mb-4 bg-white flex justify-center">
 	<%=
 		form_for :home, '/home/index', method: 'GET' do
@@ -231,3 +232,15 @@
 	<p class="placeholder text-sm text-grey-dark m-4">You do not have any lists yet.</p>
 <% end %>
 <%= javascript 'drag_drop' %>
+<% end %>
+
+<div id="root"></div>
+<% if lists.any? %>
+	<% lists.each do |list| %>
+		<div name="list"><%= Hanami::Utils::Json.generate(list) %></div>
+	<% end %>
+<% end %>
+
+
+
+<%= javascript 'index_bundle' %>
