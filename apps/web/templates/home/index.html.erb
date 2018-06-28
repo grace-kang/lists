@@ -1,4 +1,3 @@
-<% if false %>
 <div class="p-6 mb-4 bg-white flex justify-center">
 	<%=
 		form_for :home, '/home/index', method: 'GET' do
@@ -232,9 +231,10 @@
 	<p class="placeholder text-sm text-grey-dark m-4">You do not have any lists yet.</p>
 <% end %>
 <%= javascript 'drag_drop' %>
-<% end %>
 
+<% if false %>
 <div id="root"></div>
 <div id="user_id" class="hidden"><%= this_user.id %></div>
 
 <%= javascript 'index_bundle' %>
+<% end %>
