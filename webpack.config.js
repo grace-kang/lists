@@ -1,3 +1,5 @@
+const env = process.env.NODE_ENV
+
 var path = require("path"),
     StatsPlugin = require("stats-webpack-plugin");
 
@@ -6,6 +8,7 @@ var devServerPort = process.env.WEBPACK_DEV_SERVER_PORT,
     publicPath = process.env.WEBPACK_PUBLIC_PATH;
 
 var config = {
+	mode: env || 'development',
   entry: './apps/web/assets/javascripts/index.js',
   output: {
     path: path.resolve(__dirname, "apps/web/assets/javascripts"),
