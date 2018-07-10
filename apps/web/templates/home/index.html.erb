@@ -17,7 +17,7 @@
 <div class="flex justify-center">
 	<%=
 		form_for :new_list, '/lists', class: "max-w-xs" do
-			text_field :name, class: "border shadow parent text-grey-darker py-2 px-3 my-2", placeholder: 'List Name'
+			text_field :name, class: "border parent text-grey-darker py-2 px-3 my-2", placeholder: 'List Name'
 			hidden_field :user_id, value: this_user.id
 			hidden_field :done, value: false
 			submit 'Create', class:"bg-grey hover:bg-grey-dark font-semibold text-sm text-white py-1 px-2 mx-2 rounded"
@@ -42,7 +42,7 @@
 								<%=
 									form_for :mark_list, '/lists/mark' do
 										hidden_field :id, value: list.id
-										submit list.name, class: 'text-2xl font-bold text-grey-dark'
+										submit list.name, class: 'text-2xl font-bold text-grey-dark hover:text-grey'
 									end
 								%>
 							<% else %>
@@ -59,7 +59,7 @@
 						<div name="list_form" style="display:none">
 							<%=
 								form_for :update_list, '/lists/update' do
-									text_field :name, autofocus: 'autofocus', class: "border shadow parent w-full text-grey-darker py-2 px-3", placeholder: 'New Name'
+									text_field :name, autofocus: 'autofocus', class: "border  parent w-full text-grey-darker py-2 px-3", placeholder: 'New Name'
 									hidden_field :id, value: list.id
 									submit ''
 								end
@@ -74,7 +74,7 @@
 								hidden_field :id, value: list.id
 
 								div class: 'controls' do
-									submit 'X', class: "bg-grey hover:bg-grey-dark text-sm font-semibold text-white px-1 rounded"
+									submit 'x', class: "bg-white hover:bg-grey-light text-sm font-bold text-grey-dark py-1 px-2 border-2 rounded"
 								end
 							end
 						%>
@@ -85,7 +85,7 @@
 				<% if items[:"#{ list.id }"].any? %>
 					<div name="item_container">
 						<% items[:"#{ list.id }"].each do |item| %>
-							<div id="item" data-id=<%= item.id %> class="item py-2 px-4">
+							<div id="item" data-id=<%= item.id %> class="item group py-2 px-4 border-4 border-transparent hover:border-grey-lighter">
 
 								<%# list not done items %>
 								<% if !item.done %>
@@ -122,7 +122,7 @@
 									<% if subitems[:"#{ item.id }"].any? %>
 										<div name="subitem_container">
 											<% subitems[:"#{ item.id }"].each do |subitem|%>
-												<div data-id=<%= subitem.id %> class="subitem py-2">
+												<div data-id=<%= subitem.id %> class="subitem py-2 border-4 border-transparent hover:border-grey-lighter">
 													<% if !subitem.done %>
 														<div class="flex justify-between">
 															<%# subitem text, click to mark %>
@@ -174,7 +174,7 @@
 											form_for :newsubitem, '/subitem', class: 'px-4 py-2' do
 												hidden_field :item_id, value: item.id
 												hidden_field :done, value: false
-												text_field :text, class: "border shadow parent text-grey-darker px-2 py-2", placeholder: 'New Subitem'
+												text_field :text, class: "border  parent text-grey-darker px-2 py-2", placeholder: 'New Subitem'
 												submit 'Add', class:"bg-grey hover:bg-grey-dark font-semibold text-sm text-white py-1 px-2 rounded"
 											end
 										%>
@@ -217,7 +217,7 @@
 				<%# add new item form %>
 				<%=
 					form_for :newitem, '/items', class: 'px-6 pt-2' do
-						text_field :text, class: "border shadow parent text-grey-darker py-2 px-3 my-2", placeholder: 'New Item'
+						text_field :text, class: "border  parent text-grey-darker py-2 px-3 my-2", placeholder: 'New Item'
 						hidden_field :done, value: false
 						hidden_field :list_id, value: list.id
 						submit 'Add', class:"bg-grey hover:bg-grey-dark font-semibold text-sm text-white py-1 px-2 rounded"
