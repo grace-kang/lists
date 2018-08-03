@@ -1,3 +1,8 @@
+var http = require("http");
+setInterval(function() {
+	http.get("http://<your app name>.herokuapp.com");
+}, 300000); // every 5 minutes (300000)
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -8,50 +13,50 @@ formData.append("_csrf_token", csrf);
 
 
 class ListContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      error: null,
-      isLoaded: false,
-      lists: []
-    };
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			error: null,
+			isLoaded: false,
+			lists: []
+		};
+	}
 
-  componentDidMount() {
-    fetch("/api/lists/index/" + user_id)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            isLoaded: true,
-            lists: result
-          });
-        },
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      )
-  }
+	componentDidMount() {
+		fetch("/api/lists/index/" + user_id)
+			.then(res => res.json())
+			.then(
+				(result) => {
+					this.setState({
+						isLoaded: true,
+						lists: result
+					});
+				},
+				(error) => {
+					this.setState({
+						isLoaded: true,
+						error
+					});
+				}
+			)
+	}
 
-  render() {
-    const { error, isLoaded, lists } = this.state;
-    if (error) {
-      return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
-      return <div>Loading...</div>;
-    } else {
-      return (
+	render() {
+		const { error, isLoaded, lists } = this.state;
+		if (error) {
+			return <div>Error: {error.message}</div>;
+		} else if (!isLoaded) {
+			return <div>Loading...</div>;
+		} else {
+			return (
 				<div className="flex flex-wrap my-3 mx-4">
 					{lists.map(list => (
 						<List id={list.id} name={list.name} done={list.done} />
 					))}
 				</div>
-      );
-    }
-  }
+			);
+		}
+	}
 }
 
 ReactDOM.render(
@@ -110,48 +115,48 @@ class List extends React.Component {
 						</ul>
 					</div>
 				</div>
-      );
+			);
 		}
 	}
 }
 
 class Item extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      error: null,
-      isLoaded: false,
-      subitems: []
-    };
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			error: null,
+			isLoaded: false,
+			subitems: []
+		};
+	}
 
-  componentDidMount() {
-    fetch("/api/subitems/index/" + this.props.id)
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            isLoaded: true,
-            subitems: result
-          });
-        },
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      )
-  }
+	componentDidMount() {
+		fetch("/api/subitems/index/" + this.props.id)
+			.then(res => res.json())
+			.then(
+				(result) => {
+					this.setState({
+						isLoaded: true,
+						subitems: result
+					});
+				},
+				(error) => {
+					this.setState({
+						isLoaded: true,
+						error
+					});
+				}
+			)
+	}
 
-  render() {
-    const { error, isLoaded, subitems } = this.state;
-    if (error) {
-      return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
-      return <div>Loading...</div>;
-    } else {
-      return (
+	render() {
+		const { error, isLoaded, subitems } = this.state;
+		if (error) {
+			return <div>Error: {error.message}</div>;
+		} else if (!isLoaded) {
+			return <div>Loading...</div>;
+		} else {
+			return (
 				<div className="container">
 					<div className="item-text">
 						{this.props.text}
@@ -164,28 +169,28 @@ class Item extends React.Component {
 						</ul>
 					</div>
 				</div>
-      );
-    }
-  }
+			);
+		}
+	}
 }
 
 class Subitem extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      done: this.props.done
-    };
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			done: this.props.done
+		};
+	}
 
-  render() {
-    const done = this.state.done;
+	render() {
+		const done = this.state.done;
 		return (
 			<div className="container">
 				<div className="subitem-text">
 					{this.props.text}
 				</div>
 			</div>
-    );
-  }
+		);
+	}
 }
 
